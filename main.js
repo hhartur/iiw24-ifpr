@@ -25,8 +25,8 @@ function filtrarEmail(e) {
   if (pesquisa.trim().length == 0) {
     return;
   }
-  const emailsFiltrados = emails.filter((email) => email.includes(pesquisa));
   ul.innerHTML = "";
+  const emailsFiltrados = emails.filter((email) => email.includes(pesquisa));
   emailsFiltrados.forEach((emailFiltrado)=>{
     ul.innerHTML += `<li class="email"><a href="mailto:${emailFiltrado}" target="_blank">${emailFiltrado}</a></li>`;
   })
@@ -38,6 +38,7 @@ const pesquisa = document.getElementById("pesquisa");
 
 pesquisa.addEventListener("input", (e)=>{
     if(!e.target.value){
+      ul.innerHTML = "";
         emails.forEach((email) => {
             ul.innerHTML += `<li class="email"><a href="mailto:${email}" target="_blank">${email}</a></li>`;
           });
