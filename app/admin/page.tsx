@@ -28,6 +28,7 @@ export default function AdminPage() {
   useEffect(() => {
     fetch("/api/auth/check", { cache: "no-store" })
       .then((res) => {
+        console.log("Auth check status:", res.status);
         if (res.ok) setIsLogged(true);
         else setIsLogged(false);
       })
@@ -206,7 +207,7 @@ export default function AdminPage() {
           />
         </div>
 
-        <div className="input-ct">
+        <div className="input-ct" style={{marginBottom: 10}}>
           <input
             type="email"
             placeholder="Novo email..."
