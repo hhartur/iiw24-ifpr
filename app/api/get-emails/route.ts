@@ -8,7 +8,9 @@ export async function GET() {
     const fileContent = await readFile(filePath, "utf-8");
     const emails = JSON.parse(fileContent);
 
-    const emailList = emails.map((e: { email: string }) => e.email);
+    // Já é um array de strings — só garantir que são strings válidas
+    const emailList = emails.filter((e: any) => typeof e === "string");
+
     return NextResponse.json(emailList);
   } catch (error) {
     console.error("Erro ao ler o arquivo de emails:", error);
