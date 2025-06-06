@@ -13,7 +13,7 @@ export default function Home() {
     async function fetchEmails() {
       setLoading(true);
       const res = await fetch("/api/get-emails", {
-        method: "POST",
+        method: "GET",
       });
       const data: string[] = await res.json();
       const sorted = data.slice().sort((a, b) => a.localeCompare(b));
