@@ -309,14 +309,20 @@ button {
   padding: 10px;
   border-radius: 5px;
   user-select: none;
+  transition: .2s;
 }
 
-.footer{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 20px;
+.email-one:active {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(128, 183, 255, 0.3);
 }
-.footer h3{
-    text-align: center;
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+.footer h3 {
+  text-align: center;
 }
