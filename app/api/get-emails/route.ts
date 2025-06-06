@@ -1,14 +1,17 @@
 import { NextResponse } from "next/server";
-import { initDB, getAllEmails } from "../../../lib/db"; // ajuste o caminho
+import { readFile } from "fs/promises";
+import path from "path";
 
 export async function GET() {
   try {
-    await initDB(); // garante que a tabela exista
-    const emails = await getAllEmails();
-    const emailList = emails.map((e) => e.email);
+    const filePath = path.join(process.cwd(), "app", "api", "get-emails", "data", "emails.json");
+    const fileContent = await readFile(filePath, "utf-8");
+    const emails = JSON.parse(fileContent);
+
+    const emailList = emails.map((e: { email: string }) => e.email);
     return NextResponse.json(emailList);
   } catch (error) {
-    console.error("Erro ao buscar emails:", error);
+    console.error("Erro ao ler o arquivo de emails:", error);
     return NextResponse.json({ error: "Erro interno." }, { status: 500 });
   }
 }
