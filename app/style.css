@@ -1021,3 +1021,24 @@ ul li a:focus {
   color: var(--secondary-color);
   transform: translateX(3px);
 }
+.class-split {
+  display: flex;
+  flex-direction: row; /* lado a lado */
+  width: 100%;
+  height: 100%;       /* força usar só a altura do gridRow */
+  overflow: hidden;   /* evita que o conteúdo "estoure" */
+}
+
+.class-card.split {
+  flex: 1 1 0;        /* divide igualmente a largura */
+  min-width: 0;       /* permite encolher sem forçar quebra */
+  height: 100%;       /* garante que cada card se ajuste */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 4px;
+  font-size: 0.75rem;
+  line-height: 1.2;
+  text-align: center;
+  overflow: hidden;
+}

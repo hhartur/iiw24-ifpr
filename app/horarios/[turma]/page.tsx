@@ -14,6 +14,7 @@ interface ClassItem {
   time: string;
   color: string;
   dayName: string;
+  group: any | null;
 }
 
 interface WeekClass {
@@ -182,32 +183,81 @@ export default function HorarioPage() {
           ))}
 
           {/* Aulas posicionadas no grid */}
-          {schedule.weekClasses.map(day =>
-            day.dayClasses.map((cls, idx) => {
-              const col = dayIndices[day.dayName];
-              const startRow = gridPositions.get(cls.time);
-              
-              if (!startRow) return null;
+          {schedule.weekClasses.map(day => {
+  const groupedByTime: Record<string, typeof day.dayClasses> = {};
+  
+  day.dayClasses.forEach(cls => {
+    if (!groupedByTime[cls.time]) groupedByTime[cls.time] = [];
+    groupedByTime[cls.time].push(cls);
+  });
 
-              return (
-                <div
-                  key={`${day.dayName}-${idx}`}
-                  className="class-card"
-                  style={{
-                    gridColumn: col,
-                    gridRow: `${startRow} / span ${cls.size}`,
-                    backgroundColor: cls.color || getSubjectColor(cls.subject),
-                  }}
-                  onClick={() => handleClassClick(cls, day.dayName)}
-                  title={`${cls.subject}\n${cls.teachers.join(", ")}\n${cls.classroom}`}
-                >
-                  <div className="class-subject">{cls.subject}</div>
-                  <small className="class-teachers">{cls.teachers.join(", ")}</small>
-                  <small className="class-room">{cls.classroom}</small>
-                </div>
-              );
-            })
-          )}
+  return Object.entries(groupedByTime).map(([time, classes]) => {
+    const col = dayIndices[day.dayName];
+    const startRow = gridPositions.get(time);
+    if (!startRow) return null;
+
+    // Pega o maior size (mas sem somar, não cresce além do necessário)
+    const spanSize = Math.max(...classes.map(c => c.size));
+
+    // Se só tem 1 aula
+    if (classes.length === 1) {
+      const cls = classes[0];
+      return (
+        <div
+          key={`${day.dayName}-${time}`}
+          className="class-card"
+          style={{
+            gridColumn: col,
+            gridRow: `${startRow} / span ${spanSize}`,
+            backgroundColor: cls.color || getSubjectColor(cls.subject),
+          }}
+          onClick={() => handleClassClick(cls, day.dayName)}
+        >
+          <div className="class-subject">{cls.subject}</div>
+          <small className="class-teachers">{cls.teachers.join(", ")}</small>
+          <small className="class-room">{cls.classroom}</small>
+        </div>
+      );
+    }
+
+    // Se tem 2 ou mais no mesmo horário
+    return (
+      <div
+        key={`${day.dayName}-${time}`}
+        className="class-split"
+        style={{
+          gridColumn: col,
+          gridRow: `${startRow} / span ${spanSize}`,
+        }}
+      >
+        {classes.map((cls, idx) => {
+          // extrai só "Grupo A" / "Grupo B" se houver
+          const grupoRaw = cls.students.find(s => s.includes("Grupo"));
+          const grupo = grupoRaw ? grupoRaw.replace(/.*Grupo\s*/i, "Grupo ") : null;
+
+          if (grupo != null){
+            cls.group = grupo
+          }
+          return (
+            <div
+              key={idx}
+              className="class-card split"
+              style={{
+                backgroundColor: cls.color || getSubjectColor(cls.subject),
+              }}
+              onClick={() => handleClassClick(cls, day.dayName)}
+            >
+              <div className="class-subject">{cls.subject}</div>
+              {grupo && <small className="class-group">{grupo}</small>}
+              <small className="class-teachers">{cls.teachers.join(", ")}</small>
+              <small className="class-room">{cls.classroom}</small>
+            </div>
+          );
+        })}
+      </div>
+    );
+  });
+})}
         </div>
       </main>
 
@@ -217,12 +267,14 @@ export default function HorarioPage() {
           <div className="edit-panel" onClick={(e) => e.stopPropagation()}>
             <h3>{selectedClass.subject}</h3>
             
+            {selectedClass.group ? (
+              <div style={{ marginBottom: '15px', fontSize: '28px' }}>
+                <strong>{selectedClass.group}</strong>
+              </div>
+            ) : null}
+
             <div style={{ marginBottom: '15px' }}>
               <strong>Dia:</strong> {selectedClass.dayName}
-            </div>
-            
-            <div style={{ marginBottom: '15px' }}>
-              <strong>Horário:</strong> {selectedClass.time}
             </div>
             
             <div style={{ marginBottom: '15px' }}>

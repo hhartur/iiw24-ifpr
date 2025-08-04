@@ -8,6 +8,7 @@ interface ClassItem {
   time: string;
   color: string;
   dayName: string;
+  group: any | null;
 }
 
 interface WeekClass {
@@ -43,6 +44,7 @@ export function normalizeSchedule(data: any) {
         time: cls.time,
         color: cls.color,
         dayName: day.dayName,
+        group: null,
       });
     });
   });
