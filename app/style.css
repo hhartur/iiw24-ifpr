@@ -1005,6 +1005,11 @@ ul li a:focus {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 15px;
+}
+
+.menu-item i{
+  cursor: pointer;
 }
 
 .submenu {
