@@ -42,7 +42,7 @@
 }
 
 * {
-  scrollbar-width: thin; 
+  scrollbar-width: thin;
   scrollbar-color: #388bfd #0d1117;
 }
 
@@ -76,10 +76,10 @@ header {
   font-size: 1.8rem;
   margin: 0;
   cursor: pointer;
-  transition: .2s;
+  transition: 0.2s;
 }
 
-.header-logo h1:hover{
+.header-logo h1:hover {
   filter: brightness(75%);
 }
 
@@ -89,7 +89,11 @@ header {
 }
 
 .header-buttons button {
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  background: linear-gradient(
+    135deg,
+    var(--primary-color),
+    var(--secondary-color)
+  );
   color: var(--text-primary);
   border: none;
   padding: 0.6rem 1.2rem;
@@ -412,11 +416,11 @@ footer {
   align-items: center;
 }
 
-.info-sec{
+.info-sec {
   width: 80%;
   margin: auto;
 }
-.info-sec p{
+.info-sec p {
   margin-left: 15px;
   text-align: justify;
 }
@@ -495,7 +499,7 @@ button {
   padding: 10px;
   border-radius: 5px;
   user-select: none;
-  transition: .2s;
+  transition: 0.2s;
 }
 
 .email-one:active {
@@ -512,7 +516,7 @@ button {
 .footer h3 {
   text-align: center;
 }
-.email-list{
+.email-list {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -521,7 +525,7 @@ button {
   width: 85%;
 }
 
-.input-ct{
+.input-ct {
   width: 90%;
   margin: auto;
 }
@@ -606,10 +610,10 @@ button {
   .edit-buttons {
     flex-direction: column;
   }
-  .main-card{
+  .main-card {
     width: 80%;
   }
-  .info-sec{
+  .info-sec {
     width: 90%;
   }
 }
@@ -679,6 +683,7 @@ button {
 
 /* Cartões das aulas */
 .class-card {
+  z-index: 5;
   padding: 8px 10px;
   border-radius: 6px;
   color: white;
@@ -736,7 +741,8 @@ button {
   }
 }
 
-.fa-bars, .fa-xmark{
+.fa-bars,
+.fa-xmark {
   font-size: 32px;
   color: var(--primary-color);
   cursor: pointer;
@@ -796,63 +802,78 @@ button {
 }
 
 /* Cores específicas para matérias comuns */
-.class-card[title*="Matemática"], .class-card[title*="MATEMÁTICA"] {
+.class-card[title*="Matemática"],
+.class-card[title*="MATEMÁTICA"] {
   background-color: #3498db !important;
 }
 
-.class-card[title*="Português"], .class-card[title*="PORTUGUÊS"] {
+.class-card[title*="Português"],
+.class-card[title*="PORTUGUÊS"] {
   background-color: #e74c3c !important;
 }
 
-.class-card[title*="História"], .class-card[title*="HISTÓRIA"] {
+.class-card[title*="História"],
+.class-card[title*="HISTÓRIA"] {
   background-color: #f39c12 !important;
 }
 
-.class-card[title*="Geografia"], .class-card[title*="GEOGRAFIA"] {
+.class-card[title*="Geografia"],
+.class-card[title*="GEOGRAFIA"] {
   background-color: #27ae60 !important;
 }
 
-.class-card[title*="Ciências"], .class-card[title*="CIÊNCIAS"] {
+.class-card[title*="Ciências"],
+.class-card[title*="CIÊNCIAS"] {
   background-color: #1abc9c !important;
 }
 
-.class-card[title*="Física"], .class-card[title*="FÍSICA"] {
+.class-card[title*="Física"],
+.class-card[title*="FÍSICA"] {
   background-color: #9b59b6 !important;
 }
 
-.class-card[title*="Química"], .class-card[title*="QUÍMICA"] {
+.class-card[title*="Química"],
+.class-card[title*="QUÍMICA"] {
   background-color: #e67e22 !important;
 }
 
-.class-card[title*="Biologia"], .class-card[title*="BIOLOGIA"] {
+.class-card[title*="Biologia"],
+.class-card[title*="BIOLOGIA"] {
   background-color: #2ecc71 !important;
 }
 
-.class-card[title*="Inglês"], .class-card[title*="INGLÊS"] {
+.class-card[title*="Inglês"],
+.class-card[title*="INGLÊS"] {
   background-color: #8e44ad !important;
 }
 
-.class-card[title*="Educação Física"], .class-card[title*="EDUCAÇÃO FÍSICA"] {
+.class-card[title*="Educação Física"],
+.class-card[title*="EDUCAÇÃO FÍSICA"] {
   background-color: #16a085 !important;
 }
 
-.class-card[title*="Artes"], .class-card[title*="ARTES"] {
+.class-card[title*="Artes"],
+.class-card[title*="ARTES"] {
   background-color: #e91e63 !important;
 }
 
-.class-card[title*="Filosofia"], .class-card[title*="FILOSOFIA"] {
+.class-card[title*="Filosofia"],
+.class-card[title*="FILOSOFIA"] {
   background-color: #34495e !important;
 }
 
-.class-card[title*="Sociologia"], .class-card[title*="SOCIOLOGIA"] {
+.class-card[title*="Sociologia"],
+.class-card[title*="SOCIOLOGIA"] {
   background-color: #95a5a6 !important;
 }
 
-.class-card[title*="Literatura"], .class-card[title*="LITERATURA"] {
+.class-card[title*="Literatura"],
+.class-card[title*="LITERATURA"] {
   background-color: #c0392b !important;
 }
 
-.class-card[title*="Espanhol"], .class-card[title*="ESPANHOL"] {
+.class-card[title*="Espanhol"],
+.class-card[title*="ESPANHOL"] {
   background-color: #d35400 !important;
 }
 
@@ -930,7 +951,7 @@ ul li a:focus {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.6);
+  background: rgba(0, 0, 0, 0.6);
   opacity: 0;
   visibility: hidden;
   transition: var(--transition);
@@ -1025,14 +1046,14 @@ ul li a:focus {
   display: flex;
   flex-direction: row; /* lado a lado */
   width: 100%;
-  height: 100%;       /* força usar só a altura do gridRow */
-  overflow: hidden;   /* evita que o conteúdo "estoure" */
+  height: 100%; /* força usar só a altura do gridRow */
+  overflow: hidden; /* evita que o conteúdo "estoure" */
 }
 
 .class-card.split {
-  flex: 1 1 0;        /* divide igualmente a largura */
-  min-width: 0;       /* permite encolher sem forçar quebra */
-  height: 100%;       /* garante que cada card se ajuste */
+  flex: 1 1 0; /* divide igualmente a largura */
+  min-width: 0; /* permite encolher sem forçar quebra */
+  height: 100%; /* garante que cada card se ajuste */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -1080,7 +1101,7 @@ ul li a:focus {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0,0,0,0.6);
+  background-color: rgba(0, 0, 0, 0.6);
   z-index: 1000;
   animation: fadeIn 0.3s ease;
 }
@@ -1116,13 +1137,23 @@ ul li a:focus {
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes popIn {
-  from { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
-  to { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+  from {
+    transform: translate(-50%, -50%) scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
 }
 
 /* Notificações */
@@ -1149,6 +1180,23 @@ ul li a:focus {
 }
 
 @keyframes slideIn {
-  from { transform: translateX(150%); opacity: 0; }
-  to { transform: translateX(0); opacity: 1; }
+  from {
+    transform: translateX(150%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+.class-card.empty {
+  background-color: #2f2f2f !important;
+  color: #888 !important;
+  font-style: italic;
+  cursor: default;
+  border: 1px solid #444;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  z-index: 0;
 }
