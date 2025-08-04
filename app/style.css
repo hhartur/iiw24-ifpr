@@ -1042,3 +1042,113 @@ ul li a:focus {
   text-align: center;
   overflow: hidden;
 }
+/* Modal e botões */
+.btn-primary {
+  background: var(--primary-color);
+  border: none;
+  color: #000;
+  padding: 12px 18px;
+  border-radius: var(--border-radius);
+  font-weight: bold;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: var(--box-shadow);
+}
+
+.btn-primary:hover {
+  background: var(--secondary-color);
+  transform: scale(1.05);
+}
+
+.btn-cancel {
+  background: var(--error-color);
+  border: none;
+  color: #fff;
+  padding: 10px 15px;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-cancel:hover {
+  background: #d32f2f;
+}
+
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0,0,0,0.6);
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
+}
+
+.modal-content {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.9);
+  background-color: var(--background-light);
+  padding: 25px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  width: 90%;
+  max-width: 450px;
+  z-index: 1001;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  animation: popIn 0.3s ease forwards;
+}
+
+.modal-content input,
+.modal-content textarea {
+  background: var(--background-dark);
+  color: var(--text-primary);
+  border: 1px solid #333;
+  padding: 10px;
+  border-radius: var(--border-radius);
+  transition: var(--transition);
+  resize: vertical; /* só aumenta para baixo */
+  min-height: 40px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes popIn {
+  from { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
+  to { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+}
+
+/* Notificações */
+.toast {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 12px 20px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  font-weight: bold;
+  animation: slideIn 0.4s ease forwards;
+  z-index: 1100;
+}
+
+.toast.success {
+  background: var(--success-color);
+  color: #fff;
+}
+
+.toast.error {
+  background: var(--error-color);
+  color: #fff;
+}
+
+@keyframes slideIn {
+  from { transform: translateX(150%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
