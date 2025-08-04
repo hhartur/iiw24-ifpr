@@ -281,8 +281,8 @@ export default function HorarioPage() {
                         time: slot.time,
                         size: spanSize,
                         color: "#444",
-                        dayName: dayName,
                         group: classes,
+                        
                       },
                       dayName
                     )
