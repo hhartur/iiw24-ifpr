@@ -8,6 +8,7 @@
   -webkit-tap-highlight-color: transparent;
 }
 
+/* TEMA ESCURO (padrão) */
 :root {
   --primary-color: #80b7ff;
   --secondary-color: #ff7eb9;
@@ -21,6 +22,37 @@
   --border-radius: 8px;
   --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   --transition: all 0.3s ease;
+}
+
+/* TEMA CLARO */
+[data-theme="light"] {
+  --primary-color: #2563eb;
+  --secondary-color: #dc2626;
+  --background-dark: #ffffff;
+  --background-light: #f8fafc;
+  --text-primary: #1f2937;
+  --text-secondary: #6b7280;
+  --success-color: #059669;
+  --warning-color: #d97706;
+  --error-color: #dc2626;
+  --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* Scrollbar para tema claro */
+[data-theme="light"] ::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+[data-theme="light"] ::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #2563eb, #3b82f6);
+}
+
+[data-theme="light"] ::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #3b82f6, #2563eb);
+}
+
+[data-theme="light"] * {
+  scrollbar-color: #3b82f6 #f1f5f9;
 }
 
 ::-webkit-scrollbar {
@@ -649,8 +681,42 @@ button {
   padding: 12px;
   border-radius: 8px;
   user-select: none;
-  overflow-x: auto;
+  overflow-x: auto; 
+  grid-auto-rows: 80px; /* força altura igual para cada linha */
 }
+
+.schedule-container {
+  display: grid;
+  grid-template-columns: 80px repeat(5, 1fr);
+  grid-template-rows: 50px repeat(auto-fill, 80px); 
+  /* primeira linha (dias) = 50px, o resto = 80px */
+  gap: 8px;
+  background-color: #222;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+/* cabeçalhos dos dias */
+.schedule-container .schedule-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+  font-size: 1rem;
+  background: #333;
+  border-radius: 6px;
+}
+
+/* horários e cards */
+.schedule-container .time-slot,
+.schedule-container .class-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+}
+
 
 /* Cabeçalho vazio do canto */
 .time-header {
@@ -1008,7 +1074,7 @@ ul li a:focus {
   gap: 15px;
 }
 
-.menu-item i{
+.menu-item i {
   cursor: pointer;
 }
 
