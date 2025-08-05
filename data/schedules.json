@@ -9,9 +9,7 @@
         "turmas": [
           "ago2023",
           "ago2024", 
-          "ago2025",
-          "ago2025_-_grupo_a",
-          "ago2025_-_grupo_b"
+          "ago2025"
         ]
       },
       "comercio": {
@@ -28,9 +26,7 @@
           "ein2022",
           "ein2023",
           "ein2024",
-          "ein2025",
-          "ein2025_-_grupo_a",
-          "ein2025_-_grupo_b"
+          "ein2025"
         ]
       },
       "informatica_campus": {
@@ -46,9 +42,7 @@
         "turmas": [
           "iiw2023b",
           "iiw2024b",
-          "iiw2025b",
-          "iiw2025b_-_grupo_a",
-          "iiw2025b_-_grupo_b"
+          "iiw2025b"
         ]
       }
     },

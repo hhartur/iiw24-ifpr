@@ -45,6 +45,8 @@ export default function HorarioPage() {
       .then((res) => res.json())
       .then((data) => {
         if (data && data.ok) {
+          document.title = "IIW24 - " + className
+
           const normalized = normalizeSchedule(data.content);
 
           const mapDay = new Map<string, Omit<ClassItem, "dayName">[]>();

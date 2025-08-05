@@ -1,5 +1,7 @@
+"use client"
 import schedulesData from "@/data/schedules.json";
 import Link from "next/link";
+import { useEffect } from "react";
 
 interface Curso {
   nome_completo: string;
@@ -28,6 +30,10 @@ const schedules: Schedules = schedulesData;
 
 export default function HorariosPage() {
   const { cursos } = schedules;
+
+  useEffect(()=>{
+    document.title = "IIW24 - Horários"
+  }, [])
 
   return (
     <main style={{ padding: 20 }} className="horarios">
