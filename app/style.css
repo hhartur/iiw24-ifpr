@@ -717,6 +717,22 @@ button {
   overflow: hidden;
 }
 
+.schedule-container .class-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+  padding: 6px;
+  flex-direction: column;
+  
+  font-size: clamp(0.6rem, 1vw, 1rem); /* diminui   o texto quando faltar espaço */
+  word-break: break-word;              /* quebra palavras grandes */
+  line-height: 1.2;                    /* linhas mais compactas */
+  hyphens: auto;
+  flex-wrap: wrap;
+}
+
 
 /* Cabeçalho vazio do canto */
 .time-header {
