@@ -3,6 +3,7 @@
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { normalizeSchedule } from "@/utils/classNormalizer";
+import ScheduleBoard from "@/app/components/ScheduleBoard";
 import Error from "next/error";
 
 interface ClassItem {
@@ -28,27 +29,26 @@ interface ScheduleNormalized {
   weekClasses: WeekClass[];
 }
 
-export default function HorarioPage() {
+export default function HorarioSalaPage() {
   const params = useParams();
-  const className = params.turma;
+  const roomName = params.sala;
 
   const [notFound, setNotFound] = useState(false);
   const [schedule, setSchedule] = useState<ScheduleNormalized | null>(null);
   const [selectedClass, setSelectedClass] = useState<ClassItem | null>(null);
 
   useEffect(() => {
-    fetch("/api/get-schedule", {
+    fetch("/api/get-room", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ className }),
+      body: JSON.stringify({ roomName }),
     })
       .then((res) => res.json())
       .then((data) => {
         if (data && data.ok) {
-          document.title = "IIW24 - " + className
-
           const normalized = normalizeSchedule(data.content);
-
+          document.title = "IIW24 - " + normalized.title
+          
           const mapDay = new Map<string, Omit<ClassItem, "dayName">[]>();
 
           normalized.classes.forEach((cls) => {
@@ -86,7 +86,7 @@ export default function HorarioPage() {
           setNotFound(true);
         }
       });
-  }, [className]);
+  }, [roomName]);
 
   const handleClassClick = (cls: Omit<ClassItem, "dayName">, dayName: string) => {
     setSelectedClass({ ...cls, dayName });
@@ -169,135 +169,7 @@ export default function HorarioPage() {
     <>
       <main className="horario-page">
         <h1>{schedule.title}</h1>
-
-        <div className="schedule-container">
-          <div className="time-header"></div>
-
-          {[
-            "Segunda-Feira",
-            "Terça-Feira",
-            "Quarta-Feira",
-            "Quinta-Feira",
-            "Sexta-Feira",
-          ].map((day) => (
-            <div key={day} className="schedule-header">
-              {day}
-            </div>
-          ))}
-
-          {schedule.time.map((slot, index) => (
-            <div
-              key={slot.time}
-              className="time-slot"
-              style={{
-                gridColumn: "1",
-                gridRow: index + 2,
-              }}
-            >
-              {slot.time}
-            </div>
-          ))}
-
-          {/* Agora renderizar as aulas e preenchimentos "sem aula" */}
-          {["Segunda-Feira", "Terça-Feira", "Quarta-Feira", "Quinta-Feira", "Sexta-Feira"].map((dayName) => {
-            return schedule.time.map((slot) => {
-              const classes = getClassesAt(dayName, slot.time);
-              const col = dayIndices[dayName];
-              const startRow = gridPositions.get(slot.time);
-              if (!startRow) return null;
-
-              if (classes.length === 0) {
-                // Sem aula, renderiza card cinza claro
-                return (
-                  <div
-                    key={`${dayName}-${slot.time}-empty`}
-                    className="class-card empty"
-                    style={{
-                      gridColumn: col,
-                      gridRow: startRow,
-                      backgroundColor: "#2f2f2f",
-                      color: "#888",
-                      fontStyle: "italic",
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      cursor: "default",
-                      border: "1px solid #444",
-                    }}
-                  >
-                    Sem aula
-                  </div>
-                );
-              }
-
-              const spanSize = Math.max(...classes.map((c) => c.size));
-
-              if (classes.length === 1) {
-                const cls = classes[0];
-                return (
-                  <div
-                    key={`${dayName}-${slot.time}`}
-                    className="class-card"
-                    style={{
-                      gridColumn: col,
-                      gridRow: `${startRow} / span ${spanSize}`,
-                      backgroundColor: cls.color || getSubjectColor(cls.subject),
-                      cursor: "pointer",
-                    }}
-                    onClick={() => handleClassClick(cls, dayName)}
-                  >
-                    <div className="class-subject">{cls.subject}</div>
-                    <small className="class-teachers">{cls.teachers.join(", ")}</small>
-                    <small className="class-room">{cls.classroom}</small>
-                  </div>
-                );
-              }
-
-              // Vários grupos no mesmo horário - mostrar card único "Aula dividida"
-              return (
-                <div
-                  key={`${dayName}-${slot.time}`}
-                  className="class-card divided"
-                  style={{
-                    gridColumn: col,
-                    gridRow: `${startRow} / span ${spanSize}`,
-                    backgroundColor: "#444",
-                    cursor: "pointer",
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    color: "#ddd",
-                    fontWeight: "bold",
-                    fontSize: "1.1rem",
-                    textAlign: "center",
-                    padding: "8px",
-                  }}
-                  onClick={() =>
-                    handleClassClick(
-                      {
-                        subject: "Aula dividida",
-                        teachers: [],
-                        classroom: "",
-                        students: [],
-                        time: slot.time,
-                        size: spanSize,
-                        color: "#444",
-                        group: classes,
-                        
-                      },
-                      dayName
-                    )
-                  }
-                  title={`${classes.length} grupos`}
-                >
-                  <div>Aula dividida</div>
-                  <small>{classes.length} grupos</small>
-                </div>
-              );
-            });
-          })}
-        </div>
+        <ScheduleBoard schedule={schedule} onSelectClass={setSelectedClass} />
       </main>
 
       {/* Modal de detalhes */}

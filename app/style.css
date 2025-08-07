@@ -1287,3 +1287,380 @@ ul li a:focus {
   text-align: center;
   z-index: 0;
 }
+/*ASDADSADAS*/
+/* Animações para abrir/fechar seções */
+.submenu-main {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease-in-out, opacity 0.3s ease-in-out;
+  padding-left: 10px;
+  opacity: 0;
+}
+
+.submenu-main.expanded {
+  max-height: calc(100vh - 200px); /* Altura dinâmica baseada na viewport */
+  opacity: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.section-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease-in-out, opacity 0.25s ease-in-out;
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+.section-content.expanded {
+  max-height: calc(60vh); /* Altura máxima responsiva */
+  opacity: 1;
+  transform: translateY(0);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.submenu-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-in-out, opacity 0.2s ease-in-out;
+  margin-left: 15px;
+  opacity: 0;
+}
+
+.submenu-content.expanded {
+  max-height: 400px; /* Altura maior para mais itens */
+  opacity: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* Scrollbar customizada para menus */
+.submenu-main.expanded::-webkit-scrollbar,
+.section-content.expanded::-webkit-scrollbar,
+.submenu-content.expanded::-webkit-scrollbar {
+  width: 6px;
+}
+
+.submenu-main.expanded::-webkit-scrollbar-track,
+.section-content.expanded::-webkit-scrollbar-track,
+.submenu-content.expanded::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 3px;
+}
+
+.submenu-main.expanded::-webkit-scrollbar-thumb,
+.section-content.expanded::-webkit-scrollbar-thumb,
+.submenu-content.expanded::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 3px;
+  opacity: 0.7;
+}
+
+.submenu-main.expanded::-webkit-scrollbar-thumb:hover,
+.section-content.expanded::-webkit-scrollbar-thumb:hover,
+.submenu-content.expanded::-webkit-scrollbar-thumb:hover {
+  background: var(--secondary-color);
+  opacity: 1;
+}
+
+/* Firefox scrollbar */
+.submenu-main.expanded,
+.section-content.expanded,
+.submenu-content.expanded {
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary-color) rgba(255, 255, 255, 0.05);
+}
+
+/* Estilos para os cabeçalhos clicáveis */
+.section-header {
+  margin: 10px 0;
+  position: sticky;
+  top: 0;
+  background: var(--background-light);
+  z-index: 10;
+  border-radius: 6px;
+}
+
+.section-title {
+  color: var(--primary-color);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 8px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  user-select: none;
+  background: rgba(128, 183, 255, 0.08);
+  margin: 0;
+  border: 1px solid rgba(128, 183, 255, 0.15);
+}
+
+.section-title:hover {
+  color: var(--secondary-color);
+  background: rgba(255, 126, 185, 0.12);
+  transform: translateX(3px);
+  border-color: rgba(255, 126, 185, 0.3);
+  box-shadow: 0 2px 8px rgba(255, 126, 185, 0.2);
+}
+
+.section-title:active {
+  transform: translateX(1px) scale(0.98);
+}
+
+.section-title i {
+  font-size: 0.9rem;
+  transition: transform 0.3s ease;
+}
+
+.submenu-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  padding: 8px 10px;
+  border-radius: 5px;
+  transition: all 0.25s ease;
+  user-select: none;
+  margin: 2px 0;
+}
+
+.submenu-header:hover {
+  background: rgba(128, 183, 255, 0.12);
+  transform: translateX(3px);
+  border-left: 3px solid var(--primary-color);
+  padding-left: 7px;
+}
+
+.submenu-header:active {
+  transform: translateX(1px) scale(0.98);
+}
+
+.submenu-header i {
+  font-size: 0.8rem;
+  transition: transform 0.25s ease;
+  margin-left: 8px;
+}
+
+/* Estilos para separar Campus e Toledo */
+.campus-section {
+  margin-bottom: 20px;
+  border-radius: 8px;
+  background: rgba(128, 183, 255, 0.02);
+  padding: 8px;
+  border: 1px solid rgba(128, 183, 255, 0.1);
+}
+
+.toledo-section {
+  margin-bottom: 20px;
+  border-radius: 8px;
+  background: rgba(255, 126, 185, 0.02);
+  padding: 8px;
+  border: 1px solid rgba(255, 126, 185, 0.1);
+}
+
+.campus-title {
+  color: var(--secondary-color);
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin: 8px 0 10px 0;
+  padding: 8px 12px;
+  border-left: 4px solid var(--secondary-color);
+  background: rgba(255, 126, 185, 0.1);
+  border-radius: 6px;
+  display: block;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  position: sticky;
+  top: 0;
+  z-index: 9;
+}
+
+/* Ajustes para melhor organização visual */
+.submenu-item {
+  margin-bottom: 6px;
+  border-radius: 5px;
+  transition: all 0.2s ease;
+}
+
+.campus-section .submenu-item {
+  border-left: 2px solid rgba(128, 183, 255, 0.3);
+  padding-left: 12px;
+  margin-left: 6px;
+  background: rgba(128, 183, 255, 0.02);
+}
+
+.toledo-section .submenu-item {
+  border-left: 2px solid rgba(255, 126, 185, 0.3);
+  padding-left: 12px;
+  margin-left: 6px;
+  background: rgba(255, 126, 185, 0.02);
+}
+
+.campus-section .submenu-item:hover {
+  background: rgba(128, 183, 255, 0.08);
+  border-left-color: rgba(128, 183, 255, 0.6);
+}
+
+.toledo-section .submenu-item:hover {
+  background: rgba(255, 126, 185, 0.08);
+  border-left-color: rgba(255, 126, 185, 0.6);
+}
+
+/* Melhoria nos botões do submenu */
+.submenu-content ul {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0;
+}
+
+.submenu-content li {
+  margin: 6px 0;
+}
+
+.submenu-btn {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.25s ease;
+  text-align: left;
+  padding: 8px 12px;
+  border-radius: 5px;
+  width: 100%;
+  display: block;
+  border-left: 2px solid transparent;
+  position: relative;
+  overflow: hidden;
+}
+
+.submenu-btn::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 0;
+  background: rgba(255, 126, 185, 0.1);
+  transition: width 0.3s ease;
+  z-index: -1;
+}
+
+.submenu-btn:hover::before {
+  width: 100%;
+}
+
+.submenu-btn:hover {
+  color: var(--secondary-color);
+  transform: translateX(4px);
+  border-left-color: var(--secondary-color);
+  font-weight: 500;
+}
+
+.submenu-btn:active {
+  transform: translateX(2px) scale(0.98);
+}
+
+/* Animação suave para todos os chevrons */
+.submenu-header i,
+.section-title i {
+  transform-origin: center;
+}
+
+.submenu-header:hover i,
+.section-title:hover i {
+  transform: scale(1.1) rotate(5deg);
+}
+
+.section-title.expanded i {
+  transform: rotate(180deg);
+}
+
+.submenu-header.expanded i {
+  transform: rotate(180deg);
+}
+
+/* Indicador de carregamento */
+.submenu-content:empty::after {
+  content: "Carregando...";
+  display: block;
+  text-align: center;
+  color: var(--text-secondary);
+  font-style: italic;
+  padding: 20px;
+  opacity: 0.7;
+}
+
+/* Fade-in para itens quando aparecem */
+.submenu-content.expanded li,
+.section-content.expanded > * {
+  animation: fadeInUp 0.3s ease forwards;
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.submenu-content.expanded li:nth-child(1) { animation-delay: 0.1s; }
+.submenu-content.expanded li:nth-child(2) { animation-delay: 0.15s; }
+.submenu-content.expanded li:nth-child(3) { animation-delay: 0.2s; }
+.submenu-content.expanded li:nth-child(4) { animation-delay: 0.25s; }
+.submenu-content.expanded li:nth-child(n+5) { animation-delay: 0.3s; }
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .submenu-main.expanded {
+    max-height: calc(100vh - 120px);
+  }
+  
+  .section-content.expanded {
+    max-height: calc(70vh);
+  }
+
+  .submenu-content.expanded {
+    max-height: 350px;
+  }
+
+  .campus-title {
+    font-size: 0.8rem;
+    padding: 6px 10px;
+    top: 0;
+  }
+
+  .section-title {
+    padding: 8px 6px;
+    font-size: 0.9rem;
+  }
+
+  .submenu-header {
+    padding: 6px 8px;
+  }
+
+  .submenu-btn {
+    padding: 6px 10px;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .submenu-main.expanded {
+    max-height: calc(100vh - 100px);
+  }
+
+  .section-content.expanded {
+    max-height: calc(75vh);
+  }
+
+  .campus-title {
+    top: 0;
+  }
+}

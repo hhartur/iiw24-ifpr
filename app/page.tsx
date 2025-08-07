@@ -1,12 +1,7 @@
 "use client"
-import { useEffect } from "react"
 import Footer from "./components/Footer"
 
 export default function Home(){
-    useEffect(()=>{
-
-    }, [])
-
     return(
         <>
         <main>

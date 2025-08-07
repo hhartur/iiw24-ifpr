@@ -10,11 +10,24 @@ export const metadata: Metadata = {
   description: "Site da turma IIW24 do câmpus de Assis Chateaubriand",
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+  const scheduleRes = await fetch(new URL("/api/get-schedule", process.env.NEXTAUTH_URL || "http://localhost:3000"), {
+    cache: "no-store",
+  });
+
+  const roomsRes = await fetch(new URL("/api/get-room", process.env.NEXTAUTH_URL || "http://localhost:3000"), {
+    cache: "no-store",
+  });
+
+  const schedule = await scheduleRes.json();
+  schedule.cursos = schedule.content
+  const rooms = await roomsRes.json();
+
   return (
     <html lang="pt-br">
       <head>
@@ -24,7 +37,7 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <Header />
+        <Header schedule={schedule} rooms={rooms} />
         <NextTopLoader showSpinner={false} speed={500}/>
         {children}
       </body>

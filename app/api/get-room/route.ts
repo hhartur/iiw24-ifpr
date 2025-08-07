@@ -1,35 +1,35 @@
 import { NextRequest, NextResponse } from "next/server";
 import { fetchFolderData } from "@/utils/fetchFolderData";
 
-const urlBaseTurmaRaw =
-  "https://raw.githubusercontent.com/vonmecheln/ifpr-horarios/refs/heads/main/docs/turma";
-const urlBaseTurma =
-  "https://github.com/vonmecheln/ifpr-horarios/tree/main/docs/turma/";
+const urlBaseSalaRaw =
+  "https://raw.githubusercontent.com/vonmecheln/ifpr-horarios/refs/heads/main/docs/sala";
+const urlBaseSala =
+  "https://github.com/vonmecheln/ifpr-horarios/tree/main/docs/sala/";
 
-const turmaMap: Record<string, { pasta: string; arquivo?: string }> = {
-  eadtma2025: { pasta: "tmaead", arquivo: "eadtma2025.mdx" },
-  eadsp2025: { pasta: "tspead", arquivo: "eadsp2025.mdx" },
-  eadst2025: { pasta: "tstead", arquivo: "eadst2025.mdx" },
-  eadtl2025: { pasta: "tlead", arquivo: "eadtl2025.mdx" },
-  tads_esp: { pasta: "tads", arquivo: "tads_especial.mdx" },
-};
+async function getUrlRaw(sala: string): Promise<string | null> {
+  if (!sala) return null;
+  const normalizado = sala.trim().toLowerCase();
 
-function getUrlRaw(turma: string): string | null {
-  if (!turma) return null;
-  const normalizado = turma.trim().toLowerCase();
+  const files: any[] = await fetchFolderData(urlBaseSala);
+  if (!files) return null;
 
-  if (turmaMap[normalizado]) {
-    const { pasta, arquivo } = turmaMap[normalizado];
-    return `${urlBaseTurmaRaw}/${pasta}/${arquivo || `${normalizado}.mdx`}`;
-  }
-
-  const match = normalizado.match(/^[a-z]+/);
-  if (!match) return null;
-
-  const pastaCurso = match[0];
   const arquivo = `${normalizado}.mdx`;
 
-  return `${urlBaseTurmaRaw}/${pastaCurso}/${arquivo}`;
+  let block = null;
+  for (const file of files) {
+    if (file.contentType === "directory") {
+      const subFiles: any[] = await fetchFolderData(urlBaseSala + file.name);
+      for (const subFile of subFiles) {
+        if (subFile.name === arquivo) {
+          block = file.name;
+          break;
+        }
+      }
+    }
+  }
+  if (!block) return null;
+
+  return `${urlBaseSalaRaw}/${block}/${arquivo}`;
 }
 
 async function getRawContent(rawUrl: string) {
@@ -88,10 +88,10 @@ async function getRawContent(rawUrl: string) {
 
 export async function POST(req: NextRequest) {
   const body = await req.json();
-  const className = body.className;
+  const roomName = body.roomName;
 
-  if (className) {
-    const rawUrl = getUrlRaw(className);
+  if (roomName) {
+    const rawUrl = await getUrlRaw(roomName);
 
     if (rawUrl) {
       const rawContent = await getRawContent(rawUrl);
@@ -109,19 +109,18 @@ export async function POST(req: NextRequest) {
 }
 
 export async function GET() {
-  const files = await fetchFolderData(urlBaseTurma);
+  const files = await fetchFolderData(urlBaseSala);
   if (!files) return NextResponse.json({ content: [], ok: false }, { status: 500 });
 
   const promises = files.map(async (file: any) => {
     if (file.contentType === "directory") {
-      const subFiles = await fetchFolderData(urlBaseTurma + file.name);
-      file.cursos = subFiles;
-      console.log(file.cursos)
+      const subFiles = await fetchFolderData(urlBaseSala + file.name);
+      file.classes = subFiles;
     }
     return file;
   });
 
   const results = await Promise.all(promises);
-  
+
   return NextResponse.json({ content: results, ok: true }, { status: 200 });
 }
