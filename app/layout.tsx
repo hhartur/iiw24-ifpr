@@ -1,5 +1,6 @@
 import React from "react";
 import NextTopLoader from "nextjs-toploader";
+import { Analytics } from "@vercel/analytics/next"
 import { Metadata } from "next";
 import Header from "./components/Header";
 
@@ -40,6 +41,7 @@ export default async function RootLayout({
         <Header schedule={schedule} rooms={rooms} />
         <NextTopLoader showSpinner={false} speed={500}/>
         {children}
+        <Analytics/>
       </body>
     </html>
   );
