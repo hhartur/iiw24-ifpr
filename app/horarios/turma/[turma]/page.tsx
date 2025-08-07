@@ -175,7 +175,7 @@ export default function HorarioTurmaPage() {
     <>
       <main className="horario-page">
         <h1>{schedule.title}</h1>
-        <ScheduleBoard schedule={schedule} onSelectClass={setSelectedClass} />
+        <ScheduleBoard schedule={schedule} onSelectClass={setSelectedClass} showStudents={false} />
       </main>
 
       {/* Modal de detalhes */}
@@ -208,6 +208,7 @@ export default function HorarioTurmaPage() {
                         <strong>{grupo}</strong>
                       </div>
                       <div
+                      className="room-hover"
                         style={{ cursor: "pointer" }}
                         onClick={() => {
                           router.push(
@@ -244,6 +245,7 @@ export default function HorarioTurmaPage() {
                   <strong>Dia:</strong> {selectedClass.dayName}
                 </div>
                 <div
+                      className="room-hover"
                   style={{ marginBottom: "15px", cursor: "pointer" }}
                   onClick={() => {
                     router.push(

@@ -794,10 +794,13 @@ button {
 }
 
 .class-teachers,
-.class-room {
+.class-room, .class-students {
   font-size: 0.7rem;
   opacity: 0.8;
   line-height: 1.2;
+}
+.class-students{
+  opacity: 0.9;
 }
 
 /* RESPONSIVO MOBILE */
@@ -1663,4 +1666,11 @@ ul li a:focus {
   .campus-title {
     top: 0;
   }
+}
+.room-hover{
+  transition: 0.2s;
+}
+.room-hover:hover{
+  text-decoration: underline;
+  color: var(--primary-color);
 }

@@ -28,9 +28,10 @@ interface ScheduleNormalized {
 interface Props {
   schedule: ScheduleNormalized;
   onSelectClass: (cls: ClassItem) => void;
+  showStudents: boolean | null
 }
 
-export default function ScheduleBoard({ schedule, onSelectClass }: Props) {
+export default function ScheduleBoard({ schedule, onSelectClass, showStudents }: Props) {
   const dayIndices: Record<string, number> = {
     "Segunda-Feira": 2,
     "Terça-Feira": 3,
@@ -141,6 +142,9 @@ export default function ScheduleBoard({ schedule, onSelectClass }: Props) {
                 <div className="class-subject">{cls.subject}</div>
                 <small className="class-teachers">{cls.teachers.join(", ")}</small>
                 <small className="class-room">{cls.classroom}</small>
+                {showStudents && (
+                  <small className="class-students">{cls.students}</small>
+                )}
               </div>
             );
           }

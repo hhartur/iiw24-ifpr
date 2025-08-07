@@ -169,7 +169,7 @@ export default function HorarioSalaPage() {
     <>
       <main className="horario-page">
         <h1>{schedule.title}</h1>
-        <ScheduleBoard schedule={schedule} onSelectClass={setSelectedClass} />
+        <ScheduleBoard schedule={schedule} onSelectClass={setSelectedClass} showStudents={true} />
       </main>
 
       {/* Modal de detalhes */}
@@ -205,6 +205,9 @@ export default function HorarioSalaPage() {
                         <strong>Sala:</strong> {g.classroom}
                       </div>
                       <div>
+                        <strong>Turma:</strong> {g.students}
+                      </div>
+                      <div>
                         <strong>Professor(es):</strong> {g.teachers.join(", ")}
                       </div>
                       <div>
@@ -228,6 +231,9 @@ export default function HorarioSalaPage() {
                 </div>
                 <div style={{ marginBottom: "15px" }}>
                   <strong>Sala:</strong> {selectedClass.classroom}
+                </div>
+                <div style={{ marginBottom: "15px" }}>
+                    <strong>Turma:</strong> {selectedClass.students}
                 </div>
                 <div style={{ marginBottom: "15px" }}>
                   <strong>Professor(es):</strong> {selectedClass.teachers.join(", ")}

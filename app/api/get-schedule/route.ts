@@ -116,7 +116,6 @@ export async function GET() {
     if (file.contentType === "directory") {
       const subFiles = await fetchFolderData(urlBaseTurma + file.name);
       file.cursos = subFiles;
-      console.log(file.cursos)
     }
     return file;
   });
