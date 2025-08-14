@@ -1,5 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { fetchFolderData } from "@/utils/fetchFolderData";
+import fs from "fs";
+import path from "path";
+
+const dataDir = path.join(process.cwd(), "data");
+const dataPath = path.join(dataDir, "salas.json");
 
 const urlBaseSalaRaw =
   "https://raw.githubusercontent.com/vonmecheln/ifpr-horarios/refs/heads/main/docs/sala";
@@ -34,9 +39,7 @@ async function getUrlRaw(sala: string): Promise<string | null> {
 
 async function getRawContent(rawUrl: string) {
   const res = await fetch(rawUrl);
-  if (!res.ok) {
-    return null;
-  }
+  if (!res.ok) return null;
 
   const data = await res.text();
 
@@ -65,9 +68,7 @@ async function getRawContent(rawUrl: string) {
           contador++;
         } else if (char === "}") {
           contador--;
-          if (contador === 0) {
-            return i;
-          }
+          if (contador === 0) return i;
         }
       }
     }
@@ -81,7 +82,7 @@ async function getRawContent(rawUrl: string) {
 
   try {
     return eval("(" + objetoStr + ")");
-  } catch (err) {
+  } catch {
     return null;
   }
 }
@@ -92,10 +93,8 @@ export async function POST(req: NextRequest) {
 
   if (roomName) {
     const rawUrl = await getUrlRaw(roomName);
-
     if (rawUrl) {
       const rawContent = await getRawContent(rawUrl);
-
       if (rawContent) {
         return NextResponse.json(
           { content: rawContent, ok: true },
@@ -104,11 +103,19 @@ export async function POST(req: NextRequest) {
       }
     }
   }
-
   return NextResponse.json({ content: "Error", ok: false }, { status: 400 });
 }
 
 export async function GET() {
+  if (fs.existsSync(dataPath)) {
+    try {
+      const jsonData = JSON.parse(fs.readFileSync(dataPath, "utf-8"));
+      return NextResponse.json({ content: jsonData, ok: true }, { status: 200 });
+    } catch {
+      fs.unlinkSync(dataPath);
+    }
+  }
+
   const files = await fetchFolderData(urlBaseSala);
   if (!files) return NextResponse.json({ content: [], ok: false }, { status: 500 });
 
@@ -121,6 +128,11 @@ export async function GET() {
   });
 
   const results = await Promise.all(promises);
+
+  if (!fs.existsSync(dataDir)) {
+    fs.mkdirSync(dataDir, { recursive: true });
+  }
+  fs.writeFileSync(dataPath, JSON.stringify(results, null, 2), "utf-8");
 
   return NextResponse.json({ content: results, ok: true }, { status: 200 });
 }

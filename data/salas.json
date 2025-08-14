@@ -1,0 +1,225 @@
+[
+  {
+    "name": "bloco_1",
+    "path": "docs/sala/bloco_1",
+    "contentType": "directory",
+    "classes": [
+      {
+        "name": "bloco_1.md",
+        "path": "docs/sala/bloco_1/bloco_1.md",
+        "contentType": "file"
+      },
+      {
+        "name": "laboratorio_de_biologia.mdx",
+        "path": "docs/sala/bloco_1/laboratorio_de_biologia.mdx",
+        "contentType": "file"
+      },
+      {
+        "name": "laboratorio_de_computacao_aplicada.mdx",
+        "path": "docs/sala/bloco_1/laboratorio_de_computacao_aplicada.mdx",
+        "contentType": "file"
+      },
+      {
+        "name": "laboratorio_de_fisica.mdx",
+        "path": "docs/sala/bloco_1/laboratorio_de_fisica.mdx",
+        "contentType": "file"
+      },
+      {
+        "name": "laboratorio_de_informatica_a.mdx",
+        "path": "docs/sala/bloco_1/laboratorio_de_informatica_a.mdx",
+        "contentType": "file"
+      },
+      {
+        "name": "laboratorio_de_informatica_b.mdx",
+        "path": "docs/sala/bloco_1/laboratorio_de_informatica_b.mdx",
+        "contentType": "file"
+      },
+      {
+        "name": "laboratorio_de_quimica.mdx",
+        "path": "docs/sala/bloco_1/laboratorio_de_quimica.mdx",
+        "contentType": "file"
+      },
+      {
+        "name": "sala_3-1.mdx",
+        "path": "docs/sala/bloco_1/sala_3-1.mdx",
+        "contentType": "file"
+      },
+      {
+        "name": "sala_5.mdx",
+        "path": "docs/sala/bloco_1/sala_5.mdx",
+        "contentType": "file"
+      }
+    ]
+  },
+  {
+    "name": "bloco_2",
+    "path": "docs/sala/bloco_2",
+    "contentType": "directory",
+    "classes": [
+      {
+        "name": "bloco_2.md",
+        "path": "docs/sala/bloco_2/bloco_2.md",
+        "contentType": "file"
+      },
+      {
+        "name": "educacao_fisica___sala_1_b2.mdx",
+        "path": "docs/sala/bloco_2/educacao_fisica___sala_1_b2.mdx",
+        "contentType": "file"
+      },
+      {
+        "name": "laboratorio_de_automacao_e_robotica_industrial.mdx",
+        "path": "docs/sala/bloco_2/laboratorio_de_automacao_e_robotica_industrial.mdx",
+        "contentType": "file"
+      },
+      {
+        "name": "laboratorio_de_desenho_tecnico___sala_5-2.mdx",
+        "path": "docs/sala/bloco_2/laboratorio_de_desenho_tecnico___sala_5-2.mdx",
+        "contentType": "file"
+      },
+      {
+        "name": "laboratorio_de_informatica_c.mdx",
+        "path": "docs/sala/bloco_2/laboratorio_de_informatica_c.mdx",
+        "contentType": "file"
+      },
+      {
+        "name": "sala_11-2.mdx",
+        "path": "docs/sala/bloco_2/sala_11-2.mdx",
+        "contentType": "file"
+      },
+      {
+        "name": "sala_12-2.mdx",
+        "path": "docs/sala/bloco_2/sala_12-2.mdx",
+        "contentType": "file"
+      },
+      {
+        "name": "sala_13-2.mdx",
+        "path": "docs/sala/bloco_2/sala_13-2.mdx",
+        "contentType": "file"
+      },
+      {
+        "name": "sala_14-2.mdx",
+        "path": "docs/sala/bloco_2/sala_14-2.mdx",
+        "contentType": "file"
+      },
+      {
+        "name": "sala_15-2.mdx",
+        "path": "docs/sala/bloco_2/sala_15-2.mdx",
+        "contentType": "file"
+      },
+      {
+        "name": "sala_16-2.mdx",
+        "path": "docs/sala/bloco_2/sala_16-2.mdx",
+        "contentType": "file"
+      },
+      {
+        "name": "sala_6-2.mdx",
+        "path": "docs/sala/bloco_2/sala_6-2.mdx",
+        "contentType": "file"
+      },
+      {
+        "name": "sala_7-2.mdx",
+        "path": "docs/sala/bloco_2/sala_7-2.mdx",
+        "contentType": "file"
+      },
+      {
+        "name": "sala_8-2.mdx",
+        "path": "docs/sala/bloco_2/sala_8-2.mdx",
+        "contentType": "file"
+      },
+      {
+        "name": "sala_9-2.mdx",
+        "path": "docs/sala/bloco_2/sala_9-2.mdx",
+        "contentType": "file"
+      }
+    ]
+  },
+  {
+    "name": "bloco_4",
+    "path": "docs/sala/bloco_4",
+    "contentType": "directory",
+    "classes": [
+      {
+        "name": "bloco_4.md",
+        "path": "docs/sala/bloco_4/bloco_4.md",
+        "contentType": "file"
+      },
+      {
+        "name": "laboratorio_de_eletricidade_e_eletronica_b4.mdx",
+        "path": "docs/sala/bloco_4/laboratorio_de_eletricidade_e_eletronica_b4.mdx",
+        "contentType": "file"
+      },
+      {
+        "name": "laboratorio_de_maquinas_e_acionamentos_eletricos_b4.mdx",
+        "path": "docs/sala/bloco_4/laboratorio_de_maquinas_e_acionamentos_eletricos_b4.mdx",
+        "contentType": "file"
+      },
+      {
+        "name": "laboratorio_de_materiais_e_hidraulica_b4.mdx",
+        "path": "docs/sala/bloco_4/laboratorio_de_materiais_e_hidraulica_b4.mdx",
+        "contentType": "file"
+      },
+      {
+        "name": "laboratorio_de_metrologia_b4.mdx",
+        "path": "docs/sala/bloco_4/laboratorio_de_metrologia_b4.mdx",
+        "contentType": "file"
+      },
+      {
+        "name": "laboratorio_de_usinagem_b4.mdx",
+        "path": "docs/sala/bloco_4/laboratorio_de_usinagem_b4.mdx",
+        "contentType": "file"
+      },
+      {
+        "name": "sala_1-4.mdx",
+        "path": "docs/sala/bloco_4/sala_1-4.mdx",
+        "contentType": "file"
+      }
+    ]
+  },
+  {
+    "name": "bloco_cr_ifpr-biopark",
+    "path": "docs/sala/bloco_cr_ifpr-biopark",
+    "contentType": "directory",
+    "classes": [
+      {
+        "name": "bloco_cr_ifpr-biopark.md",
+        "path": "docs/sala/bloco_cr_ifpr-biopark/bloco_cr_ifpr-biopark.md",
+        "contentType": "file"
+      },
+      {
+        "name": "laboratorio_de_informatica_a_-_cr_toledo.mdx",
+        "path": "docs/sala/bloco_cr_ifpr-biopark/laboratorio_de_informatica_a_-_cr_toledo.mdx",
+        "contentType": "file"
+      },
+      {
+        "name": "laboratorio_de_informatica_b_-_cr_toledo.mdx",
+        "path": "docs/sala/bloco_cr_ifpr-biopark/laboratorio_de_informatica_b_-_cr_toledo.mdx",
+        "contentType": "file"
+      },
+      {
+        "name": "laboratorio_de_informatica_c_-_cr_toledo.mdx",
+        "path": "docs/sala/bloco_cr_ifpr-biopark/laboratorio_de_informatica_c_-_cr_toledo.mdx",
+        "contentType": "file"
+      },
+      {
+        "name": "sala_01_-_cr_toledo.mdx",
+        "path": "docs/sala/bloco_cr_ifpr-biopark/sala_01_-_cr_toledo.mdx",
+        "contentType": "file"
+      },
+      {
+        "name": "sala_02_-_cr_toledo.mdx",
+        "path": "docs/sala/bloco_cr_ifpr-biopark/sala_02_-_cr_toledo.mdx",
+        "contentType": "file"
+      },
+      {
+        "name": "sala_03_-_cr_toledo.mdx",
+        "path": "docs/sala/bloco_cr_ifpr-biopark/sala_03_-_cr_toledo.mdx",
+        "contentType": "file"
+      },
+      {
+        "name": "sala_04_-_cr_toledo.mdx",
+        "path": "docs/sala/bloco_cr_ifpr-biopark/sala_04_-_cr_toledo.mdx",
+        "contentType": "file"
+      }
+    ]
+  }
+]

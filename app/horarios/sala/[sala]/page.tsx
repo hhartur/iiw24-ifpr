@@ -1,6 +1,6 @@
 "use client";
 
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { normalizeSchedule } from "@/utils/classNormalizer";
 import ScheduleBoard from "@/app/components/ScheduleBoard";
@@ -32,6 +32,8 @@ interface ScheduleNormalized {
 export default function HorarioSalaPage() {
   const params = useParams();
   const roomName = params.sala;
+
+  const router = useRouter();
 
   const [notFound, setNotFound] = useState(false);
   const [schedule, setSchedule] = useState<ScheduleNormalized | null>(null);
@@ -232,7 +234,11 @@ export default function HorarioSalaPage() {
                 <div style={{ marginBottom: "15px" }}>
                   <strong>Sala:</strong> {selectedClass.classroom}
                 </div>
-                <div style={{ marginBottom: "15px" }}>
+                <div style={{ marginBottom: "15px", cursor: "pointer" }} className="room-hover"
+                onClick={()=>{
+                  router.push("/horarios/turma/" + selectedClass.students)
+                }
+                }>
                     <strong>Turma:</strong> {selectedClass.students}
                 </div>
                 <div style={{ marginBottom: "15px" }}>

@@ -1,0 +1,415 @@
+[
+  {
+    "name": "ago",
+    "path": "docs/turma/ago",
+    "contentType": "directory",
+    "cursos": [
+      {
+        "name": "ago.md",
+        "path": "docs/turma/ago/ago.md",
+        "contentType": "file"
+      },
+      {
+        "name": "ago2023.mdx",
+        "path": "docs/turma/ago/ago2023.mdx",
+        "contentType": "file"
+      },
+      {
+        "name": "ago2024.mdx",
+        "path": "docs/turma/ago/ago2024.mdx",
+        "contentType": "file"
+      },
+      {
+        "name": "ago2025.mdx",
+        "path": "docs/turma/ago/ago2025.mdx",
+        "contentType": "file"
+      }
+    ]
+  },
+  {
+    "name": "agr",
+    "path": "docs/turma/agr",
+    "contentType": "directory",
+    "cursos": [
+      {
+        "name": "agr.md",
+        "path": "docs/turma/agr/agr.md",
+        "contentType": "file"
+      },
+      {
+        "name": "agr2024.mdx",
+        "path": "docs/turma/agr/agr2024.mdx",
+        "contentType": "file"
+      },
+      {
+        "name": "agr2025.mdx",
+        "path": "docs/turma/agr/agr2025.mdx",
+        "contentType": "file"
+      }
+    ]
+  },
+  {
+    "name": "bio",
+    "path": "docs/turma/bio",
+    "contentType": "directory",
+    "cursos": [
+      {
+        "name": "bio.md",
+        "path": "docs/turma/bio/bio.md",
+        "contentType": "file"
+      },
+      {
+        "name": "bio_especial_1.mdx",
+        "path": "docs/turma/bio/bio_especial_1.mdx",
+        "contentType": "file"
+      },
+      {
+        "name": "bio_especial_2.mdx",
+        "path": "docs/turma/bio/bio_especial_2.mdx",
+        "contentType": "file"
+      }
+    ]
+  },
+  {
+    "name": "com",
+    "path": "docs/turma/com",
+    "contentType": "directory",
+    "cursos": [
+      {
+        "name": "com.md",
+        "path": "docs/turma/com/com.md",
+        "contentType": "file"
+      },
+      {
+        "name": "com2023.mdx",
+        "path": "docs/turma/com/com2023.mdx",
+        "contentType": "file"
+      },
+      {
+        "name": "com2024.mdx",
+        "path": "docs/turma/com/com2024.mdx",
+        "contentType": "file"
+      },
+      {
+        "name": "com2025.mdx",
+        "path": "docs/turma/com/com2025.mdx",
+        "contentType": "file"
+      }
+    ]
+  },
+  {
+    "name": "ege",
+    "path": "docs/turma/ege",
+    "contentType": "directory",
+    "cursos": [
+      {
+        "name": "ege.md",
+        "path": "docs/turma/ege/ege.md",
+        "contentType": "file"
+      },
+      {
+        "name": "ege2024.mdx",
+        "path": "docs/turma/ege/ege2024.mdx",
+        "contentType": "file"
+      }
+    ]
+  },
+  {
+    "name": "ein",
+    "path": "docs/turma/ein",
+    "contentType": "directory",
+    "cursos": [
+      {
+        "name": "ein.md",
+        "path": "docs/turma/ein/ein.md",
+        "contentType": "file"
+      },
+      {
+        "name": "ein2022.mdx",
+        "path": "docs/turma/ein/ein2022.mdx",
+        "contentType": "file"
+      },
+      {
+        "name": "ein2023.mdx",
+        "path": "docs/turma/ein/ein2023.mdx",
+        "contentType": "file"
+      },
+      {
+        "name": "ein2024.mdx",
+        "path": "docs/turma/ein/ein2024.mdx",
+        "contentType": "file"
+      },
+      {
+        "name": "ein2025.mdx",
+        "path": "docs/turma/ein/ein2025.mdx",
+        "contentType": "file"
+      }
+    ]
+  },
+  {
+    "name": "ele",
+    "path": "docs/turma/ele",
+    "contentType": "directory",
+    "cursos": [
+      {
+        "name": "ele.md",
+        "path": "docs/turma/ele/ele.md",
+        "contentType": "file"
+      },
+      {
+        "name": "ele2024.mdx",
+        "path": "docs/turma/ele/ele2024.mdx",
+        "contentType": "file"
+      },
+      {
+        "name": "ele2025.mdx",
+        "path": "docs/turma/ele/ele2025.mdx",
+        "contentType": "file"
+      }
+    ]
+  },
+  {
+    "name": "elm",
+    "path": "docs/turma/elm",
+    "contentType": "directory",
+    "cursos": [
+      {
+        "name": "elm.md",
+        "path": "docs/turma/elm/elm.md",
+        "contentType": "file"
+      },
+      {
+        "name": "elm2024.mdx",
+        "path": "docs/turma/elm/elm2024.mdx",
+        "contentType": "file"
+      },
+      {
+        "name": "elm2025.mdx",
+        "path": "docs/turma/elm/elm2025.mdx",
+        "contentType": "file"
+      }
+    ]
+  },
+  {
+    "name": "erer",
+    "path": "docs/turma/erer",
+    "contentType": "directory",
+    "cursos": [
+      {
+        "name": "erer.md",
+        "path": "docs/turma/erer/erer.md",
+        "contentType": "file"
+      },
+      {
+        "name": "erer2025.mdx",
+        "path": "docs/turma/erer/erer2025.mdx",
+        "contentType": "file"
+      }
+    ]
+  },
+  {
+    "name": "fao",
+    "path": "docs/turma/fao",
+    "contentType": "directory",
+    "cursos": [
+      {
+        "name": "fao.md",
+        "path": "docs/turma/fao/fao.md",
+        "contentType": "file"
+      },
+      {
+        "name": "fao2025-1.mdx",
+        "path": "docs/turma/fao/fao2025-1.mdx",
+        "contentType": "file"
+      }
+    ]
+  },
+  {
+    "name": "fpe",
+    "path": "docs/turma/fpe",
+    "contentType": "directory",
+    "cursos": [
+      {
+        "name": "fpe.md",
+        "path": "docs/turma/fpe/fpe.md",
+        "contentType": "file"
+      },
+      {
+        "name": "fpe2025.mdx",
+        "path": "docs/turma/fpe/fpe2025.mdx",
+        "contentType": "file"
+      }
+    ]
+  },
+  {
+    "name": "iiw",
+    "path": "docs/turma/iiw",
+    "contentType": "directory",
+    "cursos": [
+      {
+        "name": "iiw.md",
+        "path": "docs/turma/iiw/iiw.md",
+        "contentType": "file"
+      },
+      {
+        "name": "iiw2023a.mdx",
+        "path": "docs/turma/iiw/iiw2023a.mdx",
+        "contentType": "file"
+      },
+      {
+        "name": "iiw2023b.mdx",
+        "path": "docs/turma/iiw/iiw2023b.mdx",
+        "contentType": "file"
+      },
+      {
+        "name": "iiw2024a.mdx",
+        "path": "docs/turma/iiw/iiw2024a.mdx",
+        "contentType": "file"
+      },
+      {
+        "name": "iiw2024b.mdx",
+        "path": "docs/turma/iiw/iiw2024b.mdx",
+        "contentType": "file"
+      },
+      {
+        "name": "iiw2025a.mdx",
+        "path": "docs/turma/iiw/iiw2025a.mdx",
+        "contentType": "file"
+      },
+      {
+        "name": "iiw2025b.mdx",
+        "path": "docs/turma/iiw/iiw2025b.mdx",
+        "contentType": "file"
+      }
+    ]
+  },
+  {
+    "name": "tads",
+    "path": "docs/turma/tads",
+    "contentType": "directory",
+    "cursos": [
+      {
+        "name": "tads.md",
+        "path": "docs/turma/tads/tads.md",
+        "contentType": "file"
+      },
+      {
+        "name": "tads_especial.mdx",
+        "path": "docs/turma/tads/tads_especial.mdx",
+        "contentType": "file"
+      }
+    ]
+  },
+  {
+    "name": "tal",
+    "path": "docs/turma/tal",
+    "contentType": "directory",
+    "cursos": [
+      {
+        "name": "tal.md",
+        "path": "docs/turma/tal/tal.md",
+        "contentType": "file"
+      },
+      {
+        "name": "tal2024.mdx",
+        "path": "docs/turma/tal/tal2024.mdx",
+        "contentType": "file"
+      },
+      {
+        "name": "tal2025.mdx",
+        "path": "docs/turma/tal/tal2025.mdx",
+        "contentType": "file"
+      }
+    ]
+  },
+  {
+    "name": "tgc",
+    "path": "docs/turma/tgc",
+    "contentType": "directory",
+    "cursos": [
+      {
+        "name": "tgc.md",
+        "path": "docs/turma/tgc/tgc.md",
+        "contentType": "file"
+      },
+      {
+        "name": "tgc2024.mdx",
+        "path": "docs/turma/tgc/tgc2024.mdx",
+        "contentType": "file"
+      },
+      {
+        "name": "tgc2025.mdx",
+        "path": "docs/turma/tgc/tgc2025.mdx",
+        "contentType": "file"
+      }
+    ]
+  },
+  {
+    "name": "tlead",
+    "path": "docs/turma/tlead",
+    "contentType": "directory",
+    "cursos": [
+      {
+        "name": "eadtl2025.mdx",
+        "path": "docs/turma/tlead/eadtl2025.mdx",
+        "contentType": "file"
+      },
+      {
+        "name": "tlead.md",
+        "path": "docs/turma/tlead/tlead.md",
+        "contentType": "file"
+      }
+    ]
+  },
+  {
+    "name": "tmaead",
+    "path": "docs/turma/tmaead",
+    "contentType": "directory",
+    "cursos": [
+      {
+        "name": "eadtma2025.mdx",
+        "path": "docs/turma/tmaead/eadtma2025.mdx",
+        "contentType": "file"
+      },
+      {
+        "name": "tmaead.md",
+        "path": "docs/turma/tmaead/tmaead.md",
+        "contentType": "file"
+      }
+    ]
+  },
+  {
+    "name": "tspead",
+    "path": "docs/turma/tspead",
+    "contentType": "directory",
+    "cursos": [
+      {
+        "name": "eadsp2025.mdx",
+        "path": "docs/turma/tspead/eadsp2025.mdx",
+        "contentType": "file"
+      },
+      {
+        "name": "tspead.md",
+        "path": "docs/turma/tspead/tspead.md",
+        "contentType": "file"
+      }
+    ]
+  },
+  {
+    "name": "tstead",
+    "path": "docs/turma/tstead",
+    "contentType": "directory",
+    "cursos": [
+      {
+        "name": "eadst2025.mdx",
+        "path": "docs/turma/tstead/eadst2025.mdx",
+        "contentType": "file"
+      },
+      {
+        "name": "tstead.md",
+        "path": "docs/turma/tstead/tstead.md",
+        "contentType": "file"
+      }
+    ]
+  }
+]

@@ -19,6 +19,7 @@ interface Categoria {
 interface ScheduleData {
   content: Categoria[];
   ok: boolean;
+  cursos: any[];
 }
 
 interface RoomClass {
@@ -39,19 +40,7 @@ interface RoomData {
   ok: boolean;
 }
 
-interface HeaderProps {
-  schedule: ScheduleData;
-  rooms: RoomData;
-}
-
-const CursoItem = ({
-  categoria,
-  expandedCategorias,
-  toggleCategoria,
-  onNavigate,
-  mounted,
-  sectionType,
-}: {
+const CursoItem = ({ categoria, expandedCategorias, toggleCategoria, onNavigate, mounted, sectionType }: {
   categoria: Categoria;
   expandedCategorias: { [key: string]: boolean };
   toggleCategoria: (name: string, sectionType: string) => void;
@@ -63,24 +52,20 @@ const CursoItem = ({
   const expanded = !!expandedCategorias[uniqueKey];
 
   return (
-    <div key={categoria.name} className="submenu-item">
+    <div className="submenu-item">
       <div
         className={`submenu-header ${mounted && expanded ? "expanded" : ""}`}
         onClick={() => toggleCategoria(categoria.name, sectionType)}
       >
         <span>{categoria.name.toUpperCase()}</span>
-        <i
-          className={`fa-solid fa-chevron-${mounted && expanded ? "up" : "down"}`}
-        ></i>
+        <i className={`fa-solid fa-chevron-${mounted && expanded ? "up" : "down"}`}></i>
       </div>
       <div className={`submenu-content ${mounted && expanded ? "expanded" : ""}`}>
         <ul>
           {categoria.cursos
             .filter((curso) => curso.name.endsWith(".mdx"))
             .map((curso) => {
-              const nomeTurma = curso.name
-                .replace(/\.mdx$/, "")
-                .replace(/_/g, " ");
+              const nomeTurma = curso.name.replace(/\.mdx$/, "").replace(/_/g, " ");
               return (
                 <li key={curso.path}>
                   <button
@@ -109,28 +94,20 @@ const CursoItem = ({
   );
 };
 
-const BlocoItem = ({
-  bloco,
-  expanded,
-  onToggle,
-  onNavigate,
-  mounted,
-}: {
+const BlocoItem = ({ bloco, expanded, onToggle, onNavigate, mounted }: {
   bloco: RoomBlock;
   expanded: boolean;
   onToggle: (name: string) => void;
   onNavigate: (path: string) => void;
   mounted: boolean;
 }) => (
-  <div key={bloco.name} className="submenu-item">
+  <div className="submenu-item">
     <div
       className={`submenu-header ${mounted && expanded ? "expanded" : ""}`}
       onClick={() => onToggle(bloco.name)}
     >
       <span>{bloco.name}</span>
-      <i
-        className={`fa-solid fa-chevron-${mounted && expanded ? "up" : "down"}`}
-      ></i>
+      <i className={`fa-solid fa-chevron-${mounted && expanded ? "up" : "down"}`}></i>
     </div>
     <div className={`submenu-content ${mounted && expanded ? "expanded" : ""}`}>
       <ul>
@@ -169,7 +146,7 @@ const BlocoItem = ({
   </div>
 );
 
-export default function Header({ schedule, rooms }: HeaderProps) {
+export default function Header() {
   const route = useRouter();
   const [mounted, setMounted] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -178,9 +155,22 @@ export default function Header({ schedule, rooms }: HeaderProps) {
   const [salasOpen, setSalasOpen] = useState(false);
   const [expandedCategorias, setExpandedCategorias] = useState<{ [key: string]: boolean }>({});
   const [expandedSalas, setExpandedSalas] = useState<{ [key: string]: boolean }>({});
+  const [schedule, setSchedule] = useState<ScheduleData | null>(null);
+  const [rooms, setRooms] = useState<RoomData | null>(null);
 
   useEffect(() => {
     setMounted(true);
+
+    Promise.all([
+      fetch("/api/get-schedule", { cache: "no-store" }).then(res => res.json()),
+      fetch("/api/get-room", { cache: "no-store" }).then(res => res.json())
+    ])
+    .then(([scheduleData, roomsData]) => {
+      scheduleData.cursos = scheduleData.content;
+      setSchedule(scheduleData);
+      setRooms(roomsData);
+    })
+    .catch(err => console.error("Erro ao carregar dados:", err));
   }, []);
 
   const handleNavigate = (path: string) => {
@@ -190,10 +180,7 @@ export default function Header({ schedule, rooms }: HeaderProps) {
 
   const toggleCategoria = (name: string, sectionType: string) => {
     const uniqueKey = `${sectionType}-${name}`;
-    setExpandedCategorias((prev) => ({ 
-      ...prev, 
-      [uniqueKey]: !prev[uniqueKey] 
-    }));
+    setExpandedCategorias((prev) => ({ ...prev, [uniqueKey]: !prev[uniqueKey] }));
   };
 
   const toggleSala = (name: string) => {
@@ -204,7 +191,6 @@ export default function Header({ schedule, rooms }: HeaderProps) {
     if (!rooms?.content) return [];
 
     const blocoMap = new Map<string, RoomBlock>();
-
     rooms.content.forEach((bloco) => {
       if (!blocoMap.has(bloco.name)) {
         const classesUnicas = Array.from(
@@ -239,14 +225,14 @@ export default function Header({ schedule, rooms }: HeaderProps) {
     const toledo: Categoria[] = [];
 
     schedule.content.forEach(categoria => {
-      const cursosToledoIIW = categoria.cursos.filter(curso => 
-        curso.name.endsWith(".mdx") && 
-        curso.name.toLowerCase().includes("iiw") && 
+      const cursosToledoIIW = categoria.cursos.filter(curso =>
+        curso.name.endsWith(".mdx") &&
+        curso.name.toLowerCase().includes("iiw") &&
         curso.name.toLowerCase().includes("b.mdx")
       );
 
-      const cursosCampus = categoria.cursos.filter(curso => 
-        curso.name.endsWith(".mdx") && 
+      const cursosCampus = categoria.cursos.filter(curso =>
+        curso.name.endsWith(".mdx") &&
         !curso.name.toLowerCase().includes("b.mdx")
       );
 
@@ -292,28 +278,18 @@ export default function Header({ schedule, rooms }: HeaderProps) {
           <button
             className="menu-btn"
             onClick={() => setHorariosOpen(!horariosOpen)}
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-            }}
+            style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}
           >
             <span>
-              <i
-                className="fa-solid fa-calendar-days"
-                style={{ marginRight: 6 }}
-              ></i>{" "}
-              Horários
+              <i className="fa-solid fa-calendar-days" style={{ marginRight: 6 }}></i> Horários
             </span>
-            <i
-              className={`fa-solid fa-chevron-${mounted && horariosOpen ? "up" : "down"}`}
-            ></i>
+            <i className={`fa-solid fa-chevron-${mounted && horariosOpen ? "up" : "down"}`}></i>
           </button>
         </div>
 
         <div className={`submenu-main ${mounted && horariosOpen ? "expanded" : ""}`}>
           <div className="section-header">
-            <h4 
+            <h4
               className={`section-title ${mounted && turmasOpen ? "expanded" : ""}`}
               onClick={() => setTurmasOpen(!turmasOpen)}
             >
@@ -359,7 +335,7 @@ export default function Header({ schedule, rooms }: HeaderProps) {
           </div>
 
           <div className="section-header">
-            <h4 
+            <h4
               className={`section-title ${mounted && salasOpen ? "expanded" : ""}`}
               onClick={() => setSalasOpen(!salasOpen)}
             >
@@ -381,11 +357,11 @@ export default function Header({ schedule, rooms }: HeaderProps) {
                 />
               ))
             ) : (
-              <div style={{ 
-                padding: "20px", 
-                textAlign: "center", 
+              <div style={{
+                padding: "20px",
+                textAlign: "center",
                 color: "var(--text-secondary)",
-                fontStyle: "italic" 
+                fontStyle: "italic"
               }}>
                 Carregando salas...
               </div>

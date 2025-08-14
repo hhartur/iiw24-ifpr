@@ -1489,20 +1489,6 @@ ul li a:focus {
   transition: all 0.2s ease;
 }
 
-.campus-section .submenu-item {
-  border-left: 2px solid rgba(128, 183, 255, 0.3);
-  padding-left: 12px;
-  margin-left: 6px;
-  background: rgba(128, 183, 255, 0.02);
-}
-
-.toledo-section .submenu-item {
-  border-left: 2px solid rgba(255, 126, 185, 0.3);
-  padding-left: 12px;
-  margin-left: 6px;
-  background: rgba(255, 126, 185, 0.02);
-}
-
 .campus-section .submenu-item:hover {
   background: rgba(128, 183, 255, 0.08);
   border-left-color: rgba(128, 183, 255, 0.6);

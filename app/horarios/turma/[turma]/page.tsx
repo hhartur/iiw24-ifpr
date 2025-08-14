@@ -211,6 +211,7 @@ export default function HorarioTurmaPage() {
                       className="room-hover"
                         style={{ cursor: "pointer" }}
                         onClick={() => {
+                          if(!g.classroom || g.classroom == "") return;
                           router.push(
                             "/horarios/sala/" +
                               g.classroom
