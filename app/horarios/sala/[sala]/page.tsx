@@ -49,8 +49,8 @@ export default function HorarioSalaPage() {
       .then((data) => {
         if (data && data.ok) {
           const normalized = normalizeSchedule(data.content);
-          document.title = "IIW24 - " + normalized.title
-          
+          document.title = "IIW24 - " + normalized.title;
+
           const mapDay = new Map<string, Omit<ClassItem, "dayName">[]>();
 
           normalized.classes.forEach((cls) => {
@@ -90,7 +90,10 @@ export default function HorarioSalaPage() {
       });
   }, [roomName]);
 
-  const handleClassClick = (cls: Omit<ClassItem, "dayName">, dayName: string) => {
+  const handleClassClick = (
+    cls: Omit<ClassItem, "dayName">,
+    dayName: string
+  ) => {
     setSelectedClass({ ...cls, dayName });
   };
 
@@ -171,7 +174,11 @@ export default function HorarioSalaPage() {
     <>
       <main className="horario-page">
         <h1>{schedule.title}</h1>
-        <ScheduleBoard schedule={schedule} onSelectClass={setSelectedClass} showStudents={true} />
+        <ScheduleBoard
+          schedule={schedule}
+          onSelectClass={setSelectedClass}
+          showStudents={true}
+        />
       </main>
 
       {/* Modal de detalhes */}
@@ -222,9 +229,7 @@ export default function HorarioSalaPage() {
             ) : (
               <>
                 {selectedClass.group && (
-                  <div
-                    style={{ marginBottom: "15px", fontSize: "28px" }}
-                  >
+                  <div style={{ marginBottom: "15px", fontSize: "28px" }}>
                     <strong>{selectedClass.group}</strong>
                   </div>
                 )}
@@ -234,15 +239,18 @@ export default function HorarioSalaPage() {
                 <div style={{ marginBottom: "15px" }}>
                   <strong>Sala:</strong> {selectedClass.classroom}
                 </div>
-                <div style={{ marginBottom: "15px", cursor: "pointer" }} className="room-hover"
-                onClick={()=>{
-                  router.push("/horarios/turma/" + selectedClass.students)
-                }
-                }>
-                    <strong>Turma:</strong> {selectedClass.students}
+                <div
+                  style={{ marginBottom: "15px", cursor: "pointer" }}
+                  className="room-hover"
+                  onClick={() => {
+                    router.push("/horarios/turma/" + selectedClass.students);
+                  }}
+                >
+                  <strong>Turma:</strong> {selectedClass.students}
                 </div>
                 <div style={{ marginBottom: "15px" }}>
-                  <strong>Professor(es):</strong> {selectedClass.teachers.join(", ")}
+                  <strong>Professor(es):</strong>{" "}
+                  {selectedClass.teachers.join(", ")}
                 </div>
                 <div style={{ marginBottom: "15px" }}>
                   <strong>Períodos:</strong> {selectedClass.size}
@@ -256,6 +264,24 @@ export default function HorarioSalaPage() {
           </div>
         </div>
       )}
+      <div className="reference">
+        <span className="referenceGroup">
+          Informações obtidas do repositório
+          <span
+            className="referenceLink"
+            style={{ marginLeft: "5px" }}
+            onClick={() => {
+              window.open(
+                "https://github.com/vonmecheln/ifpr-horarios",
+                "_blank"
+              );
+            }}
+          >
+            GitHub de vonmecheln
+            <i className="fa-solid fa-arrow-up-right-from-square"></i>
+          </span>
+        </span>
+      </div>
     </>
   );
 }

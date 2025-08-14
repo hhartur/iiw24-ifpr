@@ -1660,3 +1660,29 @@ ul li a:focus {
   text-decoration: underline;
   color: var(--primary-color);
 }
+
+.reference {
+  display: flex;
+  flex-wrap: wrap; /* quebra no resto */
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  margin: 20px auto;
+  width: 80%;
+}
+
+
+
+.referenceLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.referenceLink:hover {
+  text-decoration: underline;
+  color: var(--primary-color);
+}

@@ -175,7 +175,11 @@ export default function HorarioTurmaPage() {
     <>
       <main className="horario-page">
         <h1>{schedule.title}</h1>
-        <ScheduleBoard schedule={schedule} onSelectClass={setSelectedClass} showStudents={false} />
+        <ScheduleBoard
+          schedule={schedule}
+          onSelectClass={setSelectedClass}
+          showStudents={false}
+        />
       </main>
 
       {/* Modal de detalhes */}
@@ -208,10 +212,10 @@ export default function HorarioTurmaPage() {
                         <strong>{grupo}</strong>
                       </div>
                       <div
-                      className="room-hover"
+                        className="room-hover"
                         style={{ cursor: "pointer" }}
                         onClick={() => {
-                          if(!g.classroom || g.classroom == "") return;
+                          if (!g.classroom || g.classroom == "") return;
                           router.push(
                             "/horarios/sala/" +
                               g.classroom
@@ -246,7 +250,7 @@ export default function HorarioTurmaPage() {
                   <strong>Dia:</strong> {selectedClass.dayName}
                 </div>
                 <div
-                      className="room-hover"
+                  className="room-hover"
                   style={{ marginBottom: "15px", cursor: "pointer" }}
                   onClick={() => {
                     router.push(
@@ -278,6 +282,24 @@ export default function HorarioTurmaPage() {
           </div>
         </div>
       )}
+      <div className="reference">
+        <span className="referenceGroup">
+          Informações obtidas do repositório
+          <span
+            className="referenceLink"
+            style={{ marginLeft: "5px" }}
+            onClick={() => {
+              window.open(
+                "https://github.com/vonmecheln/ifpr-horarios",
+                "_blank"
+              );
+            }}
+          >
+            GitHub de vonmecheln
+            <i className="fa-solid fa-arrow-up-right-from-square"></i>
+          </span>
+        </span>
+      </div>
     </>
   );
 }
