@@ -60,7 +60,6 @@ export default function HorarioSalaPage() {
             mapDay.get(day)!.push(rest);
           });
 
-          // Para garantir que todos os dias da semana estejam no mapa, mesmo que vazios
           const allDays = [
             "Segunda-Feira",
             "Terça-Feira",
@@ -163,7 +162,6 @@ export default function HorarioSalaPage() {
     return colors[colorIndex];
   };
 
-  // Função para verificar se tem aula naquele dia e horário
   const getClassesAt = (dayName: string, time: string) => {
     const day = schedule.weekClasses.find((d) => d.dayName === dayName);
     if (!day) return [];
@@ -240,13 +238,15 @@ export default function HorarioSalaPage() {
                   <strong>Sala:</strong> {selectedClass.classroom}
                 </div>
                 <div
-                  style={{ marginBottom: "15px", cursor: "pointer" }}
-                  className="room-hover"
-                  onClick={() => {
-                    router.push("/horarios/turma/" + selectedClass.students);
-                  }}
+                  style={{ marginBottom: "15px" }}
                 >
-                  <strong>Turma:</strong> {selectedClass.students}
+                  <strong>Turma:</strong> selectedClass.students.map((st)=>{
+                    <div style={{cursor: "pointer"}} className="room-hover" onClick={() => {
+                    router.push("/horarios/turma/" + st);
+                  }}>
+                      {st}
+                    </div>
+                  })
                 </div>
                 <div style={{ marginBottom: "15px" }}>
                   <strong>Professor(es):</strong>{" "}
