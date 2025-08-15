@@ -90,19 +90,47 @@ async function getRawContent(rawUrl: string) {
 export async function POST(req: NextRequest) {
   const body = await req.json();
   const className = body.className;
+  if (!className) {
+    return NextResponse.json({ content: "Error", ok: false }, { status: 400 });
+  }
 
-  if (className) {
-    const rawUrl = getUrlRaw(className);
-    if (rawUrl) {
-      const rawContent = await getRawContent(rawUrl);
-      if (rawContent) {
-        return NextResponse.json(
-          { content: rawContent, ok: true },
-          { status: 200 }
-        );
+  const normalizado = className.trim().toLowerCase();
+  let rawUrl: string | null = null;
+
+  if (fs.existsSync(dataPath)) {
+    try {
+      const jsonData = JSON.parse(fs.readFileSync(dataPath, "utf-8"));
+
+      for (const file of jsonData) {
+        if (file.contentType === "directory") {
+          for (const curso of file.cursos || []) {
+            if (curso.name.toLowerCase() === `${normalizado}.mdx`) {
+              rawUrl = `${urlBaseTurmaRaw}/${file.name}/${curso.name}`;
+              break;
+            }
+          }
+        }
+        if (rawUrl) break;
       }
+    } catch (err) {
+      console.error("Erro ao ler cache:", err);
     }
   }
+
+  if (!rawUrl) {
+    rawUrl = getUrlRaw(className);
+  }
+
+  if (rawUrl) {
+    const rawContent = await getRawContent(rawUrl);
+    if (rawContent) {
+      return NextResponse.json(
+        { content: rawContent, ok: true },
+        { status: 200 }
+      );
+    }
+  }
+
   return NextResponse.json({ content: "Error", ok: false }, { status: 400 });
 }
 
