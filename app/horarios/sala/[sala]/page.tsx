@@ -237,7 +237,7 @@ export default function HorarioSalaPage() {
                 <div style={{ marginBottom: "15px" }}>
                   <strong>Sala:</strong> {selectedClass.classroom}
                 </div>
-                <div style={{ marginBottom: "15px" }}>
+                <div style={{ marginBottom: "15px", display: "flex", gap: "5px"}}>
                   <strong>Turma:</strong>
                   {selectedClass.students.map((st) => (
                     <div
