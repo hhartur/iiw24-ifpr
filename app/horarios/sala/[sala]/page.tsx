@@ -237,23 +237,19 @@ export default function HorarioSalaPage() {
                 <div style={{ marginBottom: "15px" }}>
                   <strong>Sala:</strong> {selectedClass.classroom}
                 </div>
-                <div
-                  style={{ marginBottom: "15px" }}
-                >
-                  <strong>Turma:</strong> selectedClass.students.map((st)=>{
-                    <div style={{cursor: "pointer"}} className="room-hover" onClick={() => {
-                    router.push("/horarios/turma/" + st);
-                  }}>
+                <div style={{ marginBottom: "15px" }}>
+                  <strong>Turma:</strong>
+                  {selectedClass.students.map((st) => (
+                    <div
+                      style={{ cursor: "pointer" }}
+                      className="room-hover"
+                      onClick={() => {
+                        router.push("/horarios/turma/" + st);
+                      }}
+                    >
                       {st}
                     </div>
-                  })
-                </div>
-                <div style={{ marginBottom: "15px" }}>
-                  <strong>Professor(es):</strong>{" "}
-                  {selectedClass.teachers.join(", ")}
-                </div>
-                <div style={{ marginBottom: "15px" }}>
-                  <strong>Períodos:</strong> {selectedClass.size}
+                  ))}
                 </div>
               </>
             )}
