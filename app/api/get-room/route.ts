@@ -90,19 +90,47 @@ async function getRawContent(rawUrl: string) {
 export async function POST(req: NextRequest) {
   const body = await req.json();
   const roomName = body.roomName;
+  if (!roomName) {
+    return NextResponse.json({ content: "Error", ok: false }, { status: 400 });
+  }
 
-  if (roomName) {
-    const rawUrl = await getUrlRaw(roomName);
-    if (rawUrl) {
-      const rawContent = await getRawContent(rawUrl);
-      if (rawContent) {
-        return NextResponse.json(
-          { content: rawContent, ok: true },
-          { status: 200 }
-        );
+  const normalizado = roomName.trim().toLowerCase();
+  let rawUrl: string | null = null;
+
+  if (fs.existsSync(dataPath)) {
+    try {
+      const jsonData = JSON.parse(fs.readFileSync(dataPath, "utf-8"));
+
+      for (const file of jsonData) {
+        if (file.contentType === "directory") {
+          for (const subFile of file.classes || []) {
+            if (subFile.name.toLowerCase() === `${normalizado}.mdx`) {
+              rawUrl = `${urlBaseSalaRaw}/${file.name}/${subFile.name}`;
+              break;
+            }
+          }
+        }
+        if (rawUrl) break;
       }
+    } catch (err) {
+      console.error("Erro ao ler cache:", err);
     }
   }
+
+  if (!rawUrl) {
+    rawUrl = await getUrlRaw(roomName);
+  }
+
+  if (rawUrl) {
+    const rawContent = await getRawContent(rawUrl);
+    if (rawContent) {
+      return NextResponse.json(
+        { content: rawContent, ok: true },
+        { status: 200 }
+      );
+    }
+  }
+
   return NextResponse.json({ content: "Error", ok: false }, { status: 400 });
 }
 
