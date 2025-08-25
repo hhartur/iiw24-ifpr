@@ -1,5 +1,6 @@
 import React from "react";
 import NextTopLoader from "nextjs-toploader";
+import { Bounce, ToastContainer } from "react-toastify";
 import { Analytics } from "@vercel/analytics/next"
 import { Metadata } from "next";
 import Header from "./components/Header";
@@ -42,6 +43,17 @@ export default async function RootLayout({
         <NextTopLoader showSpinner={false} speed={500}/>
         {children}
         <Analytics/>
+        <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={true}
+          newestOnTop={false}
+          closeOnClick={true}
+          rtl={false}
+          draggable
+          theme="dark"
+          transition={Bounce}
+          />
       </body>
     </html>
   );

@@ -1686,3 +1686,14 @@ ul li a:focus {
   text-decoration: underline;
   color: var(--primary-color);
 }
+#loginForm{
+  width: 20%;
+
+  border-radius: 5px;
+}
+
+@media screen and (max-width: 600px) {
+  #loginForm{
+    width: 60%;
+  }
+}
