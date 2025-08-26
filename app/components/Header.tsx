@@ -1,3 +1,4 @@
+// components/header.tsx
 "use client";
 
 import { useRouter } from "next/navigation";
@@ -40,13 +41,14 @@ interface RoomData {
   ok: boolean;
 }
 
-const CursoItem = ({ categoria, expandedCategorias, toggleCategoria, onNavigate, mounted, sectionType }: {
+const CursoItem = ({ categoria, expandedCategorias, toggleCategoria, onNavigate, mounted, sectionType, agendaMode = false }: { // Adicionado agendaMode
   categoria: Categoria;
   expandedCategorias: { [key: string]: boolean };
   toggleCategoria: (name: string, sectionType: string) => void;
   onNavigate: (path: string) => void;
   mounted: boolean;
   sectionType: string;
+  agendaMode?: boolean; // Nova prop
 }) => {
   const uniqueKey = `${sectionType}-${categoria.name}`;
   const expanded = !!expandedCategorias[uniqueKey];
@@ -66,22 +68,20 @@ const CursoItem = ({ categoria, expandedCategorias, toggleCategoria, onNavigate,
             .filter((curso) => curso.name.endsWith(".mdx"))
             .map((curso) => {
               const nomeTurma = curso.name.replace(/\.mdx$/, "").replace(/_/g, " ");
+              const normalizedPath = encodeURIComponent(
+                nomeTurma
+                  .normalize("NFD")
+                  .replace(/[\u0300-\u036f]/g, "")
+                  .replace(/[^a-zA-Z0-9 \/-]/g, "")
+                  .toLowerCase()
+                  .replace(/[ \/]/g, "_")
+              );
+              const path = agendaMode ? `/agenda/${normalizedPath}` : `/horarios/turma/${normalizedPath}`; // Ajusta o caminho
               return (
                 <li key={curso.path}>
                   <button
                     className="submenu-btn"
-                    onClick={() =>
-                      onNavigate(
-                        `/horarios/turma/${encodeURIComponent(
-                          nomeTurma
-                            .normalize("NFD")
-                            .replace(/[\u0300-\u036f]/g, "")
-                            .replace(/[^a-zA-Z0-9 \/-]/g, "")
-                            .toLowerCase()
-                            .replace(/[ \/]/g, "_")
-                        )}`
-                      )
-                    }
+                    onClick={() => onNavigate(path)}
                   >
                     {nomeTurma}
                   </button>
@@ -153,6 +153,7 @@ export default function Header() {
   const [horariosOpen, setHorariosOpen] = useState(false);
   const [turmasOpen, setTurmasOpen] = useState(false);
   const [salasOpen, setSalasOpen] = useState(false);
+  const [agendaOpen, setAgendaOpen] = useState(false); // Novo estado para a agenda
   const [expandedCategorias, setExpandedCategorias] = useState<{ [key: string]: boolean }>({});
   const [expandedSalas, setExpandedSalas] = useState<{ [key: string]: boolean }>({});
   const [schedule, setSchedule] = useState<ScheduleData | null>(null);
@@ -225,15 +226,17 @@ export default function Header() {
     const toledo: Categoria[] = [];
 
     schedule.content.forEach(categoria => {
+      // Filtra por turmas IIW em Toledo (assumindo o padrão 'iiw' e 'b.mdx' para Toledo)
       const cursosToledoIIW = categoria.cursos.filter(curso =>
         curso.name.endsWith(".mdx") &&
         curso.name.toLowerCase().includes("iiw") &&
         curso.name.toLowerCase().includes("b.mdx")
       );
 
+      // Filtra por turmas gerais do campus (excluindo o padrão específico de Toledo IIW)
       const cursosCampus = categoria.cursos.filter(curso =>
         curso.name.endsWith(".mdx") &&
-        !curso.name.toLowerCase().includes("b.mdx")
+        !curso.name.toLowerCase().includes("b.mdx") // Exclui o padrão Toledo IIW do campus
       );
 
       if (cursosToledoIIW.length > 0) {
@@ -273,6 +276,71 @@ export default function Header() {
         <button className="menu-btn" onClick={() => handleNavigate("/emails")}>
           <i className="fa-solid fa-envelope"></i> Emails
         </button>
+
+        {/* Nova Seção de Agenda */}
+        <div className="menu-item">
+          <button
+            className="menu-btn"
+            onClick={() => setAgendaOpen(!agendaOpen)}
+            style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}
+          >
+            <span>
+              <i className="fa-solid fa-clipboard-list" style={{ marginRight: 6 }}></i> Agenda
+            </span>
+            <i className={`fa-solid fa-chevron-${mounted && agendaOpen ? "up" : "down"}`}></i>
+          </button>
+        </div>
+        <div className={`submenu-main ${mounted && agendaOpen ? "expanded" : ""}`}>
+          <div className="section-header">
+            <h4
+              className={`section-title ${mounted && turmasOpen ? "expanded" : ""}`}
+              onClick={() => setTurmasOpen(!turmasOpen)}
+            >
+              Turmas
+              <i className={`fa-solid fa-chevron-${mounted && turmasOpen ? "up" : "down"}`}></i>
+            </h4>
+          </div>
+
+          <div className={`section-content ${mounted && turmasOpen ? "expanded" : ""}`}>
+            {turmasCampus.length > 0 && (
+              <div className="campus-section">
+                <h5 className="campus-title">Campus</h5>
+                {turmasCampus.map((categoria) => (
+                  <CursoItem
+                    key={`agenda-campus-${categoria.name}`}
+                    categoria={categoria}
+                    expandedCategorias={expandedCategorias}
+                    toggleCategoria={toggleCategoria}
+                    onNavigate={handleNavigate}
+                    mounted={mounted}
+                    sectionType="agenda-campus"
+                    agendaMode={true} // Ativa o modo agenda para gerar o link correto
+                  />
+                ))}
+              </div>
+            )}
+
+            {turmasToledo.length > 0 && (
+              <div className="toledo-section">
+                <h5 className="campus-title">Toledo</h5>
+                {turmasToledo.map((categoria) => (
+                  <CursoItem
+                    key={`agenda-toledo-${categoria.name}`}
+                    categoria={categoria}
+                    expandedCategorias={expandedCategorias}
+                    toggleCategoria={toggleCategoria}
+                    onNavigate={handleNavigate}
+                    mounted={mounted}
+                    sectionType="agenda-toledo"
+                    agendaMode={true} // Ativa o modo agenda para gerar o link correto
+                  />
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+        {/* Fim da Nova Seção de Agenda */}
+
 
         <div className="menu-item">
           <button

@@ -1697,3 +1697,300 @@ ul li a:focus {
     width: 60%;
   }
 }
+
+/* Add this to style.css */
+
+.agenda-page {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 0 1.5rem;
+}
+
+.agenda-page h1 {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 2.5rem;
+  background: linear-gradient(
+    90deg,
+    var(--primary-color),
+    var(--secondary-color)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.add-agenda-btn {
+  display: block;
+  margin: 1.5rem auto 2.5rem auto;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  background: linear-gradient(
+    135deg,
+    var(--primary-color),
+    var(--secondary-color)
+  );
+  color: var(--text-primary);
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.add-agenda-btn:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+}
+
+.agenda-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.agenda-card {
+  background-color: var(--background-light);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  box-shadow: var(--box-shadow);
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-left: 5px solid var(--primary-color); /* Default border */
+}
+
+.agenda-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.agenda-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.agenda-card-title {
+  font-size: 1.3rem;
+  color: var(--text-primary);
+  margin: 0;
+  flex-grow: 1;
+}
+
+.agenda-status {
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--background-dark);
+  white-space: nowrap;
+}
+
+/* Status colors */
+.agenda-status.hoje {
+  background-color: #4CAF50; /* Green */
+}
+.agenda-status.amanha {
+  background-color: #FFC107; /* Amber */
+}
+.agenda-status.em-dias {
+  background-color: #2196F3; /* Blue */
+}
+.agenda-status.pendente {
+  background-color: #F44336; /* Red */
+}
+
+.agenda-card.hoje { border-left-color: #4CAF50; }
+.agenda-card.amanha { border-left-color: #FFC107; }
+.agenda-card.em-dias { border-left-color: #2196F3; }
+.agenda-card.pendente { border-left-color: #F44336; }
+
+
+.agenda-card-description {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
+  flex-grow: 1;
+}
+
+.agenda-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto; /* Empurra o rodapé para baixo */
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.agenda-card-date {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.agenda-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.agenda-actions button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.1rem;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: var(--transition);
+  color: var(--text-secondary);
+}
+
+.agenda-actions .btn-edit:hover {
+  color: var(--primary-color);
+  background-color: rgba(128, 183, 255, 0.1);
+}
+
+.agenda-actions .btn-delete:hover {
+  color: var(--error-color);
+  background-color: rgba(244, 67, 54, 0.1);
+}
+
+.no-activities-message {
+  text-align: center;
+  color: var(--text-secondary);
+  font-style: italic;
+  font-size: 1.1rem;
+  grid-column: 1 / -1; /* Ocupa todas as colunas */
+  padding: 3rem 0;
+}
+
+.agenda-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.agenda-form label {
+  color: var(--text-primary);
+  font-weight: 500;
+  margin-bottom: -0.5rem;
+}
+
+.agenda-form input[type="text"],
+.agenda-form textarea,
+.agenda-form input[type="date"] {
+  width: 100%;
+  padding: 0.8rem;
+  border-radius: var(--border-radius);
+  border: 1px solid #333;
+  background-color: var(--background-dark);
+  color: var(--text-primary);
+  transition: var(--transition);
+}
+
+.agenda-form input[type="text"]:focus,
+.agenda-form textarea:focus,
+.agenda-form input[type="date"]:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(128, 183, 255, 0.3);
+}
+
+.agenda-form textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.form-actions .btn-primary {
+  background: var(--primary-color);
+  color: var(--background-dark);
+  padding: 0.8rem 1.5rem;
+  border-radius: var(--border-radius);
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.form-actions .btn-primary:hover {
+  background: var(--secondary-color);
+  transform: translateY(-2px);
+}
+
+.form-actions .btn-cancel {
+  background: #6c757d; /* Cinza para cancelar */
+  color: #fff;
+  padding: 0.8rem 1.5rem;
+  border-radius: var(--border-radius);
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.form-actions .btn-cancel:hover {
+  background: #495057;
+  transform: translateY(-2px);
+}
+
+/* Responsive adjustments for agenda */
+@media (max-width: 768px) {
+  .agenda-page {
+    padding: 0 1rem;
+  }
+  .agenda-page h1 {
+    font-size: 2rem;
+  }
+  .agenda-list {
+    grid-template-columns: 1fr;
+  }
+  .add-agenda-btn {
+    width: 90%;
+  }
+  .agenda-card-title {
+    font-size: 1.2rem;
+  }
+  .agenda-card-description {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .agenda-page h1 {
+    font-size: 1.8rem;
+  }
+  .agenda-card {
+    padding: 1rem;
+  }
+  .agenda-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  .agenda-status {
+    align-self: flex-end;
+  }
+  .agenda-card-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .form-actions {
+    flex-direction: column;
+  }
+  .form-actions button {
+    width: 100%;
+  }
+}
