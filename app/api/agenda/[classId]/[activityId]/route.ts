@@ -4,7 +4,7 @@ import { getAgendaDataFromGitHub, updateAgendaDataOnGitHub } from "@/lib/github"
 
 export async function PUT(
   req: NextRequest,
-  context: { params: { classId: string; activityId: string } }
+  context: any
 ) {
   const { classId, activityId } = await context.params;
   const session = await getSession();
@@ -56,7 +56,7 @@ export async function PUT(
 
 export async function DELETE(
   req: NextRequest,
-  context: { params: { classId: string; activityId: string } }
+  context: any
 ) {
   const { classId, activityId } = await context.params;
   const session = await getSession();

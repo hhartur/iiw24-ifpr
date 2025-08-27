@@ -7,7 +7,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 export async function GET(
   req: NextRequest,
-  context: { params: { classId: string } }
+  context: any 
 ) {
   const { classId } = await context.params;
 
@@ -28,7 +28,7 @@ export async function GET(
 
 export async function POST(
   req: NextRequest,
-  context: { params: { classId: string } }
+  context: any 
 ) {
   const session = await getSession();
   if (!session.isLoggedIn) {
