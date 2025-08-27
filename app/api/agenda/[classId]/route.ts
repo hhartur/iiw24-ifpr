@@ -9,7 +9,7 @@ export async function GET(
   req: NextRequest,
   context: { params: { classId: string } }
 ) {
-  const { classId } = context.params;
+  const { classId } = await context.params;
 
   try {
     let agendaData = await getAgendaDataFromGitHub();
@@ -35,7 +35,7 @@ export async function POST(
     return NextResponse.json({ message: "Não Autorizado" }, { status: 401 });
   }
 
-  const { classId } = context.params;
+  const { classId } = await context.params;
   const { title, description, date, tag } = await req.json();
 
   if (!title || !description || !date || !tag) {
