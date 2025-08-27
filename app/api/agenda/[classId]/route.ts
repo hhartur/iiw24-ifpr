@@ -1,16 +1,16 @@
 // app/api/agenda/[classId]/route.ts
 import { NextRequest, NextResponse } from "next/server";
-import { getSession } from "@/lib/session"; // Ajuste o caminho conforme necessário
-import { getAgendaDataFromGitHub, updateAgendaDataOnGitHub, cleanupOldAgendaItems } from "@/lib/github"; // Ajuste o caminho conforme necessário
-import { AgendaData, AgendaItem } from "@/lib/types"; // Ajuste o caminho conforme necessário
-import { v4 as uuidv4 } from 'uuid'; // Para gerar IDs únicos
+import { getSession } from "@/lib/session";
+import { getAgendaDataFromGitHub, updateAgendaDataOnGitHub, cleanupOldAgendaItems } from "@/lib/github";
+import { AgendaData, AgendaItem } from "@/lib/types";
+import { v4 as uuidv4 } from 'uuid';
 
 // GET: Buscar todos os itens da agenda para uma turma específica
 export async function GET(
   req: NextRequest,
   { params }: { params: { classId: string } }
 ) {
-  const { classId } = params;
+  const { classId } = await params;
 
   try {
     let agendaData = await getAgendaDataFromGitHub();
@@ -21,7 +21,6 @@ export async function GET(
       );
     }
 
-    // Realiza a limpeza de itens antigos a cada busca para manter os dados frescos
     agendaData = await cleanupOldAgendaItems(agendaData);
 
     const classAgenda = agendaData[classId] || [];
@@ -45,12 +44,12 @@ export async function POST(
     return NextResponse.json({ message: "Não Autorizado" }, { status: 401 });
   }
 
-  const { classId } = params;
-  const { title, description, date } = await req.json();
+  const { classId } = await params;
+  const { title, description, date, tag } = await req.json(); // Adicionado 'tag'
 
-  if (!title || !description || !date) {
+  if (!title || !description || !date || !tag) { // 'tag' agora é obrigatório
     return NextResponse.json(
-      { message: "Campos obrigatórios ausentes (título, descrição, data)" },
+      { message: "Campos obrigatórios ausentes (título, descrição, data, tag)" },
       { status: 400 }
     );
   }
@@ -70,7 +69,8 @@ export async function POST(
       title,
       description,
       date,
-      createdAt: new Date().toISOString(), // Salva o timestamp de criação
+      tag, // Salva a tag
+      createdAt: new Date().toISOString(),
     };
 
     if (!agendaData[classId]) {
@@ -80,7 +80,7 @@ export async function POST(
 
     const success = await updateAgendaDataOnGitHub(
       agendaData,
-      `Adicionar item da agenda para ${classId}: ${title}`
+      `Adicionar item da agenda para ${classId}: ${title} (${tag})`
     );
 
     if (!success) {

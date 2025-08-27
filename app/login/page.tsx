@@ -26,7 +26,7 @@ export default function LoginPage(){
 
         const resJson = await response.json()
         if(resJson.success == true){
-            router.push("/admin")
+            router.push("/")
             toast.success(resJson.content)
         } else{
             toast.error(resJson.content)

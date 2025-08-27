@@ -1,26 +1,33 @@
 // app/components/AgendaItemCard.tsx
 "use client";
 
-import { AgendaItem } from "@/lib/types"; // Ajuste o caminho conforme necessário
-import { getAgendaItemStatus } from "@/lib/utils"; // Ajuste o caminho conforme necessário
+import { AgendaItem } from "@/lib/types";
+import { getAgendaItemStatus } from "@/lib/utils";
 
 interface AgendaItemCardProps {
   item: AgendaItem;
   isLoggedIn: boolean;
   onEdit: (item: AgendaItem) => void;
   onDelete: (id: string) => void;
+  onShowDetails: (item: AgendaItem) => void;
 }
 
-export default function AgendaItemCard({ item, isLoggedIn, onEdit, onDelete }: AgendaItemCardProps) {
+function removerAcentos(str: string): string {
+  return str
+    .normalize("NFD") // separa acentos das letras
+    .replace(/[\u0300-\u036f]/g, ""); // remove os acentos
+}
+
+export default function AgendaItemCard({ item, isLoggedIn, onEdit, onDelete, onShowDetails }: AgendaItemCardProps) {
   const status = getAgendaItemStatus(item);
-  // Normaliza o status para usar como classe CSS
   const statusClass = status.toLowerCase().replace(/\s/g, '-').replace(/em-\d+-dias/, 'em-dias');
+  const tagClass = item.tag.toLowerCase().replace(/\s/g, '-'); // Classe para a tag
 
   return (
-    <div className={`agenda-card ${statusClass}`}>
+    <div className={`agenda-card ${statusClass}`} onClick={() => onShowDetails(item)}>
       <div className="agenda-card-header">
         <h3 className="agenda-card-title">{item.title}</h3>
-        <span className={`agenda-status ${statusClass}`}>{status}</span>
+        <span className={`agenda-status ${removerAcentos(statusClass)}`}>{status}</span>
       </div>
       <p className="agenda-card-description">{item.description}</p>
       <div className="agenda-card-footer">
@@ -30,9 +37,10 @@ export default function AgendaItemCard({ item, isLoggedIn, onEdit, onDelete }: A
             month: "2-digit",
             year: "numeric",
           })}
+          <span className={`agenda-tag-display ${tagClass}`}>{item.tag}</span> {/* Exibe a tag */}
         </span>
         {isLoggedIn && (
-          <div className="agenda-actions">
+          <div className="agenda-actions" onClick={(e) => e.stopPropagation()}>
             <button className="btn-edit" onClick={() => onEdit(item)} title="Editar">
               <i className="fa-solid fa-edit"></i>
             </button>

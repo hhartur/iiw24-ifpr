@@ -2,7 +2,7 @@
 "use client";
 
 import { useState, FormEvent, useEffect } from "react";
-import { AgendaItem } from "@/lib/types"; // Ajuste o caminho conforme necessário
+import { AgendaItem } from "@/lib/types";
 
 interface AgendaFormProps {
   initialData?: AgendaItem | null;
@@ -14,6 +14,7 @@ export default function AgendaForm({ initialData, onSubmit, onCancel }: AgendaFo
   const [title, setTitle] = useState(initialData?.title || "");
   const [description, setDescription] = useState(initialData?.description || "");
   const [date, setDate] = useState(initialData?.date || "");
+  const [tag, setTag] = useState<AgendaItem['tag']>(initialData?.tag || "atividade"); // Novo estado para a tag
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -21,6 +22,7 @@ export default function AgendaForm({ initialData, onSubmit, onCancel }: AgendaFo
       setTitle(initialData.title);
       setDescription(initialData.description);
       setDate(initialData.date);
+      setTag(initialData.tag);
     }
   }, [initialData]);
 
@@ -28,7 +30,7 @@ export default function AgendaForm({ initialData, onSubmit, onCancel }: AgendaFo
     e.preventDefault();
     setIsLoading(true);
     try {
-      await onSubmit({ title, description, date });
+      await onSubmit({ title, description, date, tag }); // Inclui a tag no submit
     } finally {
       setIsLoading(false);
     }
@@ -64,6 +66,21 @@ export default function AgendaForm({ initialData, onSubmit, onCancel }: AgendaFo
         required
         disabled={isLoading}
       />
+
+      <label htmlFor="tag">Tipo de Atividade:</label>
+      <select
+        id="tag"
+        value={tag}
+        onChange={(e) => setTag(e.target.value as AgendaItem['tag'])}
+        required
+        disabled={isLoading}
+      >
+        <option value="atividade">Atividade</option>
+        <option value="prova">Prova</option>
+        <option value="trabalho">Trabalho</option>
+        <option value="evento">Evento</option>
+        <option value="outro">Outro</option>
+      </select>
 
       <div className="form-actions">
         <button type="submit" className="btn-primary" disabled={isLoading}>

@@ -4,9 +4,10 @@
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { AgendaItem } from "@/lib/types"; // Ajuste o caminho conforme necessário
+import { AgendaItem } from "@/lib/types";
 import AgendaForm from "@/app/components/AgendaForm";
 import AgendaItemCard from "@/app/components/AgendaItemCard";
+import AgendaDetailsModal from "@/app/components/AgendaDetailsModal";
 
 export default function AgendaClassPage() {
   const params = useParams();
@@ -15,8 +16,9 @@ export default function AgendaClassPage() {
   const [agendaItems, setAgendaItems] = useState<AgendaItem[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [isFormOpen, setIsFormOpen] = useState(false);
+  const [isFormOpen, setIsFormOpen] = useState(false); // Para adicionar/editar
   const [editingItem, setEditingItem] = useState<AgendaItem | null>(null);
+  const [selectedItemForDetails, setSelectedItemForDetails] = useState<AgendaItem | null>(null); // Novo estado para detalhes
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const fetchAgendaItems = async () => {
@@ -28,7 +30,6 @@ export default function AgendaClassPage() {
         throw new Error(`Falha ao buscar agenda: ${res.statusText}`);
       }
       const data: AgendaItem[] = await res.json();
-      // Ordena por data, depois por tempo de criação
       data.sort((a, b) => {
         const dateA = new Date(a.date).getTime();
         const dateB = new Date(b.date).getTime();
@@ -77,23 +78,12 @@ export default function AgendaClassPage() {
     setIsFormOpen(true);
   };
 
-  const handleDeleteActivity = async (id: string) => {
-    if (!confirm("Tem certeza que deseja excluir esta atividade?")) return;
+  const handleShowDetails = (item: AgendaItem) => { // Nova função para mostrar detalhes
+    setSelectedItemForDetails(item);
+  };
 
-    try {
-      const res = await fetch(`/api/agenda/${classId}/${id}`, {
-        method: "DELETE",
-      });
-
-      if (!res.ok) {
-        throw new Error(`Falha ao excluir atividade: ${res.statusText}`);
-      }
-
-      toast.success("Atividade excluída com sucesso!");
-      fetchAgendaItems();
-    } catch (err: any) {
-      toast.error("Erro ao excluir atividade: " + err.message);
-    }
+  const closeModal = () => {
+    setSelectedItemForDetails(null); // Fecha o modal de detalhes
   };
 
   const handleFormSubmit = async (formData: Omit<AgendaItem, "id" | "classId" | "createdAt">) => {
@@ -123,6 +113,25 @@ export default function AgendaClassPage() {
       fetchAgendaItems();
     } catch (err: any) {
       toast.error("Erro ao salvar atividade: " + err.message);
+    }
+  };
+
+  const handleDeleteActivity = async (id: string) => {
+    if (!confirm("Tem certeza que deseja excluir esta atividade?")) return;
+
+    try {
+      const res = await fetch(`/api/agenda/${classId}/${id}`, {
+        method: "DELETE",
+      });
+
+      if (!res.ok) {
+        throw new Error(`Falha ao excluir atividade: ${res.statusText}`);
+      }
+
+      toast.success("Atividade excluída com sucesso!");
+      fetchAgendaItems();
+    } catch (err: any) {
+      toast.error("Erro ao excluir atividade: " + err.message);
     }
   };
 
@@ -159,18 +168,28 @@ export default function AgendaClassPage() {
               isLoggedIn={isLoggedIn}
               onEdit={handleEditActivity}
               onDelete={handleDeleteActivity}
+              onShowDetails={handleShowDetails} // Passa a nova função
             />
           ))
         )}
       </div>
 
+      {/* Modal para Adicionar/Editar Atividade */}
       {isFormOpen && (
         <div className="modal-backdrop" onClick={() => setIsFormOpen(false)}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <button className="modal-close-btn" onClick={() => setIsFormOpen(false)}>
+              <i className="fa-solid fa-xmark"></i>
+            </button>
             <h2>{editingItem ? "Editar Atividade" : "Adicionar Nova Atividade"}</h2>
             <AgendaForm initialData={editingItem} onSubmit={handleFormSubmit} onCancel={() => setIsFormOpen(false)} />
           </div>
         </div>
+      )}
+
+      {/* Modal para Exibir Detalhes da Atividade */}
+      {selectedItemForDetails && (
+        <AgendaDetailsModal item={selectedItemForDetails} onClose={closeModal} />
       )}
     </main>
   );

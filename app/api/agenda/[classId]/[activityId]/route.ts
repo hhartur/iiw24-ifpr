@@ -1,8 +1,8 @@
 // app/api/agenda/[classId]/[activityId]/route.ts
 import { NextRequest, NextResponse } from "next/server";
-import { getSession } from "@/lib/session"; // Ajuste o caminho conforme necessário
-import { getAgendaDataFromGitHub, updateAgendaDataOnGitHub } from "@/lib/github"; // Ajuste o caminho conforme necessário
-import { AgendaData, AgendaItem } from "@/lib/types"; // Ajuste o caminho conforme necessário
+import { getSession } from "@/lib/session";
+import { getAgendaDataFromGitHub, updateAgendaDataOnGitHub } from "@/lib/github";
+import { AgendaData, AgendaItem } from "@/lib/types";
 
 // PUT: Editar um item da agenda existente
 export async function PUT(
@@ -14,12 +14,12 @@ export async function PUT(
     return NextResponse.json({ message: "Não Autorizado" }, { status: 401 });
   }
 
-  const { classId, activityId } = params;
-  const { title, description, date } = await req.json();
+  const { classId, activityId } = await params;
+  const { title, description, date, tag } = await req.json(); // Adicionado 'tag'
 
-  if (!title || !description || !date) {
+  if (!title || !description || !date || !tag) { // 'tag' agora é obrigatório
     return NextResponse.json(
-      { message: "Campos obrigatórios ausentes (título, descrição, data)" },
+      { message: "Campos obrigatórios ausentes (título, descrição, data, tag)" },
       { status: 400 }
     );
   }
@@ -56,6 +56,7 @@ export async function PUT(
       title,
       description,
       date,
+      tag, // Atualiza a tag
     };
 
     const success = await updateAgendaDataOnGitHub(
@@ -80,7 +81,7 @@ export async function PUT(
   }
 }
 
-// DELETE: Excluir um item da agenda existente
+// DELETE: Excluir um item da agenda existente (sem alterações)
 export async function DELETE(
   req: NextRequest,
   { params }: { params: { classId: string; activityId: string } }
@@ -90,7 +91,7 @@ export async function DELETE(
     return NextResponse.json({ message: "Não Autorizado" }, { status: 401 });
   }
 
-  const { classId, activityId } = params;
+  const { classId, activityId } = await params;
 
   try {
     const agendaData = await getAgendaDataFromGitHub();

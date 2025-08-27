@@ -5,6 +5,7 @@ export interface AgendaItem {
   title: string;
   description: string;
   date: string; // Formato YYYY-MM-DD
+  tag: "atividade" | "prova" | "trabalho" | "evento" | "outro"; // Nova propriedade
   createdAt: string; // ISO string, para controle de exclusão automática
 }
 
