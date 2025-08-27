@@ -1,4 +1,14 @@
 {
   "iiw2024a": [],
-  "ago2023": []
+  "ago2023": [
+    {
+      "id": "81786b04-d9b9-4372-b43b-4f6663b3cc4a",
+      "classId": "ago2023",
+      "title": "123",
+      "description": "123",
+      "date": "2025-08-27",
+      "tag": "atividade",
+      "createdAt": "2025-08-27T00:01:59.801Z"
+    }
+  ]
 }
