@@ -17,7 +17,7 @@ export async function GET(
       return NextResponse.json({ message: "Falha ao recuperar dados da agenda." }, { status: 500 });
     }
 
-    agendaData = await cleanupOldAgendaItems(agendaData);
+    //agendaData = await cleanupOldAgendaItems(agendaData);
     const classAgenda = agendaData[classId] || [];
     return NextResponse.json(classAgenda, { status: 200 });
   } catch (error) {
