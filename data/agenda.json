@@ -56,6 +56,15 @@
       "date": "2025-09-02",
       "tag": "prova",
       "createdAt": "2025-08-31T19:48:05.785Z"
+    },
+    {
+      "id": "fbe9d61d-a7b5-41b3-9a2a-3c52b131c589",
+      "classId": "com2024",
+      "title": "Prova de História ",
+      "description": "história né Zé",
+      "date": "2025-09-03",
+      "tag": "prova",
+      "createdAt": "2025-08-31T19:48:52.757Z"
     }
   ]
 }
