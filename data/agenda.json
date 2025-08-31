@@ -46,5 +46,16 @@
       "createdAt": "2025-08-27T12:11:16.647Z"
     }
   ],
-  "ago2023": []
+  "ago2023": [],
+  "com2024": [
+    {
+      "id": "c314a69e-0c87-4808-a64e-56f0a32e739a",
+      "classId": "com2024",
+      "title": "Prova de Geo",
+      "description": "provinha de clima né Zé ",
+      "date": "2025-09-02",
+      "tag": "prova",
+      "createdAt": "2025-08-31T19:48:05.785Z"
+    }
+  ]
 }
