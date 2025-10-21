@@ -47,6 +47,15 @@
       "date": "2025-11-12",
       "tag": "prova",
       "createdAt": "2025-10-21T10:46:58.279Z"
+    },
+    {
+      "id": "d04c4448-5901-4761-a41b-0d5b15d21f9e",
+      "classId": "com2024",
+      "title": "Teatro ",
+      "description": "Teatro de Ed física ",
+      "date": "2025-11-03",
+      "tag": "trabalho",
+      "createdAt": "2025-10-21T10:47:24.936Z"
     }
   ]
 }
