@@ -101,6 +101,15 @@
       "date": "2025-11-06",
       "tag": "evento",
       "createdAt": "2025-10-31T02:57:49.917Z"
+    },
+    {
+      "id": "87361dba-c8a5-4f28-89f8-1a83b2ab8825",
+      "classId": "com2024",
+      "title": "ENEM ",
+      "description": "9 e 16\n09/11 humanas e redação \n16/11 exatas ",
+      "date": "2025-11-09",
+      "tag": "evento",
+      "createdAt": "2025-10-31T02:59:33.044Z"
     }
   ]
 }
