@@ -65,6 +65,15 @@
       "date": "2025-11-05",
       "tag": "prova",
       "createdAt": "2025-10-31T02:45:49.290Z"
+    },
+    {
+      "id": "9a7c07d4-5856-440e-9852-b45c91d7f9f8",
+      "classId": "com2024",
+      "title": "Gestão de Compras e Estoque ",
+      "description": "Curva ABC",
+      "date": "2025-11-25",
+      "tag": "prova",
+      "createdAt": "2025-10-31T02:48:09.066Z"
     }
   ]
 }
